@@ -22,17 +22,17 @@ const KeyboardAvoidingComponent = () => {
           <Text style={styles.header}>Registration</Text>
           <TextInput
             placeholder="Login"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#BDBDBD"
             style={styles.textInput}
           />
           <TextInput
             placeholder="Email"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#BDBDBD"
             style={styles.textInput}
           />
           <TextInput
             placeholder="Password"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#BDBDBD"
             style={styles.textInput}
           />
           <View style={styles.btnContainer}>
@@ -50,25 +50,28 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   inner: {
-    padding: 24,
-    flex: 0.5,
+    padding: 16,
+    flex: 0.8,
     justifyContent: 'space-around',
     borderWidth: 5,
+    backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
   header: {
     textAlign: 'center',
-    color: 'white',
+    // color: 'white',
     backgroundColor: 'rgba(0, 0, 0,0.5)',
-    fontSize: 36,
+    fontSize: 30,
+    marginTop: 92,
     marginBottom: 48,
   },
   textInput: {
-    color: '#fff',
+    height: 50,
+    fontSize: 16,
+    // padding: 16,
     height: 40,
-    borderColor: '#fff',
-    borderBottomWidth: 1,
+    backgroundColor: '#E8E8E8',
     marginBottom: 36,
   },
 
