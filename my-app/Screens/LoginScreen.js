@@ -15,7 +15,7 @@ import {
 import SvgUri from 'react-native-svg-uri';
 import addIcon from '../img/add.svg';
 
-const RegistrationScreen = () => {
+const LoginScreen = () => {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
   useEffect(() => {
@@ -43,19 +43,11 @@ const RegistrationScreen = () => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      // behavior="position"
       style={styles.container}
-      // contentContainerStyle={isKeyboardVisible ? { top: 70 } : { top: 0 }}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
-          <View style={styles.avatarBox}></View>
-          <Text style={styles.header}>Реєстрація</Text>
-          <TextInput
-            placeholder="Логін"
-            placeholderTextColor="#BDBDBD"
-            style={styles.textInput}
-          />
+          <Text style={styles.header}>Увійти</Text>
           <TextInput
             placeholder="Адреса електронної пошти"
             placeholderTextColor="#BDBDBD"
@@ -69,11 +61,16 @@ const RegistrationScreen = () => {
           {!isKeyboardVisible && (
             <View>
               <Pressable>
-                <Text style={styles.btn}>Зареєстуватися</Text>
+                <Text style={styles.btn}>Увійти</Text>
               </Pressable>
-              <TouchableWithoutFeedback>
-                <Text style={styles.link}>Вже є акаунт? Увійти</Text>
-              </TouchableWithoutFeedback>
+              <Text style={styles.link}>
+                Немає акаунту?
+                <TouchableWithoutFeedback>
+                  <Text style={{ textDecorationLine: 'underline' }}>
+                    Зареєструватися
+                  </Text>
+                </TouchableWithoutFeedback>
+              </Text>
             </View>
           )}
           {/* <View style={styles.btnContainer}>
@@ -89,10 +86,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
+    position: 'relative',
   },
   inner: {
     padding: 16,
-    // justifyContent: 'space-around',
+    // flex: 0.8,
+    justifyContent: 'space-around',
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -103,19 +102,8 @@ const styles = StyleSheet.create({
     // color: 'white',
     fontSize: 30,
     fontWeight: 500,
-    marginTop: 92,
+    marginTop: 32,
     marginBottom: 32,
-  },
-  avatarBox: {
-    width: 120,
-    height: 120,
-    backgroundColor: '#F6F6F6',
-    borderRadius: 16,
-    position: 'absolute',
-    left: '50%',
-    top: 0,
-    marginLeft: -50,
-    marginTop: -60,
   },
   textInput: {
     fontSize: 16,
@@ -135,13 +123,14 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     textAlign: 'center',
   },
+
   link: {
     marginTop: 16,
     color: '#1B4371',
     fontSize: 16,
     textAlign: 'center',
-    marginBottom: 45,
+    marginBottom: 111,
   },
 });
 
-export default RegistrationScreen;
+export default LoginScreen;
