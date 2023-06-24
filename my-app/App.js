@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
-import KeyboardAvoidingComponent from './components/KeyboardAvoidingComponent';
+import RegistrationScreen from './Screens/RegistrationScreen';
 
 export default function App() {
   return (
@@ -9,8 +9,7 @@ export default function App() {
         source={require('./photo_BG.png')}
         style={{ height: '100%', width: '100%' }}
       >
-        <KeyboardAvoidingComponent />
-        {/* <Text>My first App!</Text> */}
+        <RegistrationScreen />
         <StatusBar style="auto" />
       </ImageBackground>
     </View>

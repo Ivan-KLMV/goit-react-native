@@ -9,9 +9,10 @@ import {
   TouchableWithoutFeedback,
   Button,
   Keyboard,
+  Pressable,
 } from 'react-native';
 
-const KeyboardAvoidingComponent = () => {
+const RegistrationScreen = () => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -35,9 +36,12 @@ const KeyboardAvoidingComponent = () => {
             placeholderTextColor="#BDBDBD"
             style={styles.textInput}
           />
-          <View style={styles.btnContainer}>
-            <Button title="Submit" onPress={() => null} />
-          </View>
+          <Pressable>
+            <Text>Submit</Text>
+          </Pressable>
+          {/* <View style={styles.btnContainer}>
+            <Button title="Submit" onPress={() => null} color="#FF6C00" />
+          </View> */}
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -51,34 +55,35 @@ const styles = StyleSheet.create({
   },
   inner: {
     padding: 16,
-    flex: 0.8,
+    // flex: 0.8,
     justifyContent: 'space-around',
-    borderWidth: 5,
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
+    border: 'none',
   },
   header: {
     textAlign: 'center',
     // color: 'white',
-    backgroundColor: 'rgba(0, 0, 0,0.5)',
     fontSize: 30,
+    fontWeight: 500,
     marginTop: 92,
-    marginBottom: 48,
+    marginBottom: 32,
   },
   textInput: {
-    height: 50,
     fontSize: 16,
-    // padding: 16,
-    height: 40,
+    padding: 16,
+    height: 50,
     backgroundColor: '#E8E8E8',
     marginBottom: 36,
+    borderRadius: 1,
   },
 
   btnContainer: {
-    backgroundColor: 'white',
-    marginTop: 12,
+    marginTop: 27,
+    marginBottom: 80,
+    // borderRadius: 100,
   },
 });
 
-export default KeyboardAvoidingComponent;
+export default RegistrationScreen;
