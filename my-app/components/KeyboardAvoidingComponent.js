@@ -19,9 +19,19 @@ const KeyboardAvoidingComponent = () => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
-          <Text style={styles.header}>Header</Text>
+          <Text style={styles.header}>Registration</Text>
           <TextInput
-            placeholder="Username"
+            placeholder="Login"
+            placeholderTextColor="#fff"
+            style={styles.textInput}
+          />
+          <TextInput
+            placeholder="Email"
+            placeholderTextColor="#fff"
+            style={styles.textInput}
+          />
+          <TextInput
+            placeholder="Password"
             placeholderTextColor="#fff"
             style={styles.textInput}
           />
@@ -37,18 +47,22 @@ const KeyboardAvoidingComponent = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'flex-end',
   },
   inner: {
     padding: 24,
-    flex: 1,
+    flex: 0.5,
     justifyContent: 'space-around',
+    borderWidth: 5,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
   },
   header: {
     textAlign: 'center',
     color: 'white',
+    backgroundColor: 'rgba(0, 0, 0,0.5)',
     fontSize: 36,
     marginBottom: 48,
-    backgroundColor: 'rgba(0, 0, 0,0.5)',
   },
   textInput: {
     color: '#fff',
