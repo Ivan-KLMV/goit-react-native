@@ -24,6 +24,7 @@ const RegistrationScreen = () => {
   };
 
   useEffect(() => {
+    console.log(isKeyboardVisible);
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       () => {
@@ -55,7 +56,16 @@ const RegistrationScreen = () => {
       >
         <View style={styles.inner}>
           <View style={styles.avatarBox}>
-            {/* <SvgUri width={12} height={12} uri="../img/add.svg" /> */}
+            <Image
+              source={require('../img/add.png')}
+              style={{
+                width: 25,
+                height: 25,
+                position: 'absolute',
+                right: -12,
+                top: 75,
+              }}
+            />
           </View>
           <Text style={styles.header}>Реєстрація</Text>
           <TextInput
