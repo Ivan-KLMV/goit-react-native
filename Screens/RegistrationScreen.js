@@ -8,15 +8,20 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  Pressable,
-  Linking,
   Image,
+  TouchableHighlightComponent,
 } from 'react-native';
 import SvgUri from 'react-native-svg-uri';
 import addIcon from '../img/add.svg';
+import { TouchableHighlight } from 'react-native';
 
 const RegistrationScreen = () => {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+  const [isPasswordShown, setPasswordShown] = useState(true);
+
+  const passwordShowHandler = () => {
+    setPasswordShown((state) => !state);
+  };
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -41,36 +46,58 @@ const RegistrationScreen = () => {
   // console.log(isKeyboardVisible);
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      // behavior="position"
-      style={styles.container}
-      // contentContainerStyle={isKeyboardVisible ? { top: 70 } : { top: 0 }}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        // behavior="position"
+        style={styles.container}
+        // contentContainerStyle={isKeyboardVisible ? { top: 70 } : { top: 0 }}
+      >
         <View style={styles.inner}>
-          <View style={styles.avatarBox}></View>
+          <View style={styles.avatarBox}>
+            {/* <SvgUri width={12} height={12} uri="../img/add.svg" /> */}
+          </View>
           <Text style={styles.header}>Реєстрація</Text>
           <TextInput
             placeholder="Логін"
+            inputMode="text"
             placeholderTextColor="#BDBDBD"
             style={styles.textInput}
           />
           <TextInput
             placeholder="Адреса електронної пошти"
+            inputMode="email"
             placeholderTextColor="#BDBDBD"
             style={styles.textInput}
           />
-          <TextInput
-            placeholder="Пароль"
-            placeholderTextColor="#BDBDBD"
-            style={styles.textInput}
-          />
+          <View style={{ position: 'relative' }}>
+            <TextInput
+              placeholder="Пароль"
+              placeholderTextColor="#BDBDBD"
+              secureTextEntry={isPasswordShown}
+              style={styles.textInput}
+            />
+            <TouchableWithoutFeedback
+              onPress={passwordShowHandler}
+              onPressIn={passwordShowHandler}
+            >
+              <Text
+                style={{
+                  position: 'absolute',
+                  right: 16,
+                  top: 13,
+                  color: '#1B4371',
+                }}
+              >
+                Показати
+              </Text>
+            </TouchableWithoutFeedback>
+          </View>
           {!isKeyboardVisible && (
             <View>
-              <Pressable>
+              <TouchableHighlight>
                 <Text style={styles.btn}>Зареєстуватися</Text>
-              </Pressable>
+              </TouchableHighlight>
               <TouchableWithoutFeedback>
                 <Text style={styles.link}>Вже є акаунт? Увійти</Text>
               </TouchableWithoutFeedback>
@@ -80,8 +107,8 @@ const RegistrationScreen = () => {
             <Button title="Submit" onPress={() => null} color="#FF6C00" />
           </View> */}
         </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -122,11 +149,12 @@ const styles = StyleSheet.create({
     padding: 16,
     height: 50,
     backgroundColor: '#E8E8E8',
-    marginBottom: 36,
+    marginBottom: 16,
     borderRadius: 5,
   },
 
   btn: {
+    marginTop: 27,
     borderRadius: 50,
     fontSize: 16,
     backgroundColor: '#FF6C00',

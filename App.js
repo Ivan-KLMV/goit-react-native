@@ -10,7 +10,7 @@ export default function App() {
         source={require('./img/photo_BG.png')}
         style={{ height: '100%', width: '100%' }}
       >
-        {/* <StatusBar style="auto" /> */}
+        <StatusBar style="auto" />
         <View style={{ position: 'relative' }}></View>
         <RegistrationScreen />
 

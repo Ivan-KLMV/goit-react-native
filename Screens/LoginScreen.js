@@ -11,12 +11,18 @@ import {
   Pressable,
   Linking,
   Image,
+  TouchableHighlight,
 } from 'react-native';
 import SvgUri from 'react-native-svg-uri';
 import addIcon from '../img/add.svg';
 
 const LoginScreen = () => {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+  const [isPasswordShown, setPasswordShown] = useState(true);
+
+  const passwordShowHandler = () => {
+    setPasswordShown((state) => !state);
+  };
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -41,11 +47,11 @@ const LoginScreen = () => {
   // console.log(isKeyboardVisible);
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.container}
+      >
         <View style={styles.inner}>
           <Text style={styles.header}>Увійти</Text>
           <TextInput
@@ -53,16 +59,34 @@ const LoginScreen = () => {
             placeholderTextColor="#BDBDBD"
             style={styles.textInput}
           />
-          <TextInput
-            placeholder="Пароль"
-            placeholderTextColor="#BDBDBD"
-            style={styles.textInput}
-          />
+          <View style={{ position: 'relative' }}>
+            <TextInput
+              placeholder="Пароль"
+              placeholderTextColor="#BDBDBD"
+              secureTextEntry={isPasswordShown}
+              style={styles.textInput}
+            />
+            <TouchableWithoutFeedback
+              onPress={passwordShowHandler}
+              onPressIn={passwordShowHandler}
+            >
+              <Text
+                style={{
+                  position: 'absolute',
+                  right: 16,
+                  top: 13,
+                  color: '#1B4371',
+                }}
+              >
+                Показати
+              </Text>
+            </TouchableWithoutFeedback>
+          </View>
           {!isKeyboardVisible && (
             <View>
-              <Pressable>
+              <TouchableHighlight>
                 <Text style={styles.btn}>Увійти</Text>
-              </Pressable>
+              </TouchableHighlight>
               <Text style={styles.link}>
                 Немає акаунту?
                 <TouchableWithoutFeedback>
@@ -77,8 +101,8 @@ const LoginScreen = () => {
             <Button title="Submit" onPress={() => null} color="#FF6C00" />
           </View> */}
         </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -110,11 +134,12 @@ const styles = StyleSheet.create({
     padding: 16,
     height: 50,
     backgroundColor: '#E8E8E8',
-    marginBottom: 36,
+    marginBottom: 16,
     borderRadius: 5,
   },
 
   btn: {
+    marginTop: 27,
     borderRadius: 50,
     fontSize: 16,
     backgroundColor: '#FF6C00',
