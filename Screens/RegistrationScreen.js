@@ -24,7 +24,7 @@ const RegistrationScreen = () => {
   };
 
   useEffect(() => {
-    // console.log(isKeyboardVisible);
+    console.log(isKeyboardVisible);
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       () => {
