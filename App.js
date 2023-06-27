@@ -16,44 +16,17 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   return (
-    // <SafeAreaProvider>
-    //   <View style={{ flex: 1, backgroundColor: 'white' }}>
-    //     <View style={{ flex: 1, backgroundColor: 'orange' }}>
-    //       <SafeAreaView style={{ flex: 1 }}>
-    //         <View
-    //           style={{
-    //             flex: 1,
-    //             justifyContent: 'flex-end',
-    //           }}
-    //         >
-    //           <View
-    //             style={{
-    //               borderTopLeftRadius: 25,
-    //               borderTopRightRadius: 25,
-    //               backgroundColor: '#fff',
-    //             }}
-    //           >
-    //             <Text style={styles.header}>Header</Text>
-    //             <TextInput placeholder="Username" style={styles.textInput} />
-    //             <TextInput placeholder="Username" style={styles.textInput} />
-    //             <TextInput placeholder="Username" style={styles.textInput} />
-    //             <View style={styles.btnContainer}>
-    //               <Button title="Submit" onPress={() => null} />
-    //             </View>
-    //           </View>
-    //         </View>
-    //         {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss}> */}
-    //         {/* </TouchableWithoutFeedback> */}
-    //       </SafeAreaView>
-    //     </View>
-    //   </View>
-    // </SafeAreaProvider>
-    // <SafeAreaProvider>
-    <View style={{ flex: 1, backgroundColor: 'orange' }}>
-      <StatusBar style="auto" />
-      <RegistrationScreen />
-    </View>
-    // </SafeAreaProvider>
+    <SafeAreaProvider>
+      <View style={{ flex: 1, backgroundColor: 'orange' }}>
+        <ImageBackground
+          source={require('./img/photo_BG.png')}
+          style={{ flex: 1 }}
+          resizeMode="cover"
+        ></ImageBackground>
+        <StatusBar style="auto" />
+        <RegistrationScreen />
+      </View>
+    </SafeAreaProvider>
   );
 }
 
