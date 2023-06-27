@@ -10,11 +10,11 @@ import {
   Keyboard,
   Image,
   TouchableHighlightComponent,
+  TouchableHighlight,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import SvgUri from 'react-native-svg-uri';
 import addIcon from '../img/add.svg';
-import { TouchableHighlight } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const RegistrationScreen = () => {
   const [isFocused, setFocus] = useState(false);
