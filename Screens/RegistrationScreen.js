@@ -16,15 +16,11 @@ import addIcon from '../img/add.svg';
 import { TouchableHighlight } from 'react-native';
 
 const RegistrationScreen = () => {
+  const [isFocused, setFocus] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [isPasswordShown, setPasswordShown] = useState(true);
 
-  const passwordShowHandler = () => {
-    setPasswordShown((state) => !state);
-  };
-
   useEffect(() => {
-    console.log(isKeyboardVisible);
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       () => {
@@ -44,7 +40,21 @@ const RegistrationScreen = () => {
       keyboardDidHideListener.remove();
     };
   }, []);
-  // console.log(isKeyboardVisible);
+
+  const passwordShowHandler = () => {
+    setPasswordShown(!isPasswordShown);
+  };
+
+  const focusHandler = (inputId) => {
+    setFocus((prevFocusedInput) =>
+      prevFocusedInput === inputId ? null : inputId
+    );
+  };
+
+  const inputStyles = (inputId) => ({
+    ...styles.textInput,
+    borderColor: isFocused === inputId ? '#FF6C00' : '#E8E8E8',
+  });
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -72,27 +82,34 @@ const RegistrationScreen = () => {
             placeholder="Логін"
             inputMode="text"
             placeholderTextColor="#BDBDBD"
-            style={styles.textInput}
+            style={inputStyles(1)}
+            onFocus={() => focusHandler(1)}
+            onBlur={() => focusHandler(1)}
           />
           <TextInput
             placeholder="Адреса електронної пошти"
             inputMode="email"
             placeholderTextColor="#BDBDBD"
-            style={styles.textInput}
+            style={inputStyles(2)}
+            onFocus={() => focusHandler(2)}
+            onBlur={() => focusHandler(2)}
           />
           <View style={{ position: 'relative' }}>
             <TextInput
               placeholder="Пароль"
               placeholderTextColor="#BDBDBD"
               secureTextEntry={isPasswordShown}
-              style={styles.textInput}
+              style={inputStyles(3)}
+              onFocus={() => focusHandler(3)}
+              onBlur={() => focusHandler(3)}
             />
             <TouchableWithoutFeedback
-              onPress={passwordShowHandler}
+              onPressOut={passwordShowHandler}
               onPressIn={passwordShowHandler}
             >
               <Text
                 style={{
+                  fontSize: 16,
                   position: 'absolute',
                   right: 16,
                   top: 13,
@@ -158,7 +175,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 16,
     height: 50,
-    backgroundColor: '#E8E8E8',
+    backgroundColor: '#F6F6F6',
+    borderWidth: 1,
     marginBottom: 16,
     borderRadius: 5,
   },
