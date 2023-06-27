@@ -13,16 +13,14 @@ import {
   Image,
   TouchableHighlight,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import SvgUri from 'react-native-svg-uri';
 import addIcon from '../img/add.svg';
 
 const LoginScreen = () => {
+  const [isFocused, setFocus] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [isPasswordShown, setPasswordShown] = useState(true);
-
-  const passwordShowHandler = () => {
-    setPasswordShown((state) => !state);
-  };
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -44,64 +42,80 @@ const LoginScreen = () => {
       keyboardDidHideListener.remove();
     };
   }, []);
-  // console.log(isKeyboardVisible);
+
+  const passwordShowHandler = () => {
+    setPasswordShown((state) => !state);
+  };
+
+  const focusHandler = (inputId) => {
+    setFocus((prevFocusedInput) =>
+      prevFocusedInput === inputId ? null : inputId
+    );
+  };
+
+  const inputStyles = (inputId) => ({
+    ...styles.textInput,
+    borderColor: isFocused === inputId ? '#FF6C00' : '#E8E8E8',
+    backgroundColor: isFocused === inputId ? '#ffffff' : '#F6F6F6',
+  });
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.container}
-      >
-        <View style={styles.inner}>
-          <Text style={styles.header}>Увійти</Text>
-          <TextInput
-            placeholder="Адреса електронної пошти"
-            placeholderTextColor="#BDBDBD"
-            style={styles.textInput}
-          />
-          <View style={{ position: 'relative' }}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <View style={styles.inner}>
+            <Text style={styles.header}>Увійти</Text>
             <TextInput
-              placeholder="Пароль"
+              placeholder="Адреса електронної пошти"
+              inputMode="email"
               placeholderTextColor="#BDBDBD"
-              secureTextEntry={isPasswordShown}
-              style={styles.textInput}
+              style={inputStyles(1)}
+              onFocus={() => focusHandler(1)}
+              onBlur={() => focusHandler(1)}
             />
-            <TouchableWithoutFeedback
-              onPress={passwordShowHandler}
-              onPressIn={passwordShowHandler}
-            >
-              <Text
-                style={{
-                  position: 'absolute',
-                  right: 16,
-                  top: 13,
-                  color: '#1B4371',
-                }}
+            <View style={{ position: 'relative' }}>
+              <TextInput
+                placeholder="Пароль"
+                placeholderTextColor="#BDBDBD"
+                secureTextEntry={isPasswordShown}
+                style={inputStyles(2)}
+                onFocus={() => focusHandler(2)}
+                onBlur={() => focusHandler(2)}
+              />
+              <TouchableWithoutFeedback
+                onPress={passwordShowHandler}
+                onPressIn={passwordShowHandler}
               >
-                Показати
-              </Text>
-            </TouchableWithoutFeedback>
-          </View>
-          {!isKeyboardVisible && (
-            <View>
-              <TouchableHighlight>
-                <Text style={styles.btn}>Увійти</Text>
-              </TouchableHighlight>
-              <Text style={styles.link}>
-                Немає акаунту?
-                <TouchableWithoutFeedback>
-                  <Text style={{ textDecorationLine: 'underline' }}>
-                    Зареєструватися
-                  </Text>
-                </TouchableWithoutFeedback>
-              </Text>
+                <Text
+                  style={{
+                    position: 'absolute',
+                    right: 16,
+                    top: 13,
+                    color: '#1B4371',
+                  }}
+                >
+                  Показати
+                </Text>
+              </TouchableWithoutFeedback>
             </View>
-          )}
-          {/* <View style={styles.btnContainer}>
-            <Button title="Submit" onPress={() => null} color="#FF6C00" />
-          </View> */}
+            {!isKeyboardVisible && (
+              <View>
+                <TouchableHighlight>
+                  <Text style={styles.btn}>Увійти</Text>
+                </TouchableHighlight>
+                <Text style={styles.link}>
+                  Немає акаунту?
+                  <TouchableWithoutFeedback>
+                    <Text style={{ textDecorationLine: 'underline' }}>
+                      Зареєструватися
+                    </Text>
+                  </TouchableWithoutFeedback>
+                </Text>
+              </View>
+            )}
+          </View>
         </View>
-      </KeyboardAvoidingView>
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 };
@@ -110,20 +124,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
-    position: 'relative',
   },
   inner: {
     padding: 16,
-    // flex: 0.8,
-    justifyContent: 'space-around',
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    // border: 'none',
   },
   header: {
     textAlign: 'center',
-    // color: 'white',
     fontSize: 30,
     fontWeight: 500,
     marginTop: 32,
@@ -133,9 +142,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 16,
     height: 50,
-    backgroundColor: '#E8E8E8',
     marginBottom: 16,
     borderRadius: 5,
+    borderWidth: 1,
   },
 
   btn: {
