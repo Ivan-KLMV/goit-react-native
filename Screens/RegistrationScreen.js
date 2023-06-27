@@ -58,83 +58,77 @@ const RegistrationScreen = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        // behavior="position"
-        style={styles.container}
-        // contentContainerStyle={isKeyboardVisible ? { top: 70 } : { top: 0 }}
-      >
-        <View style={styles.inner}>
-          <View style={styles.avatarBox}>
-            <Image
-              source={require('../img/add.png')}
-              style={{
-                width: 25,
-                height: 25,
-                position: 'absolute',
-                right: -12,
-                top: 75,
-              }}
-            />
-          </View>
-          <Text style={styles.header}>Реєстрація</Text>
-          <TextInput
-            placeholder="Логін"
-            inputMode="text"
-            placeholderTextColor="#BDBDBD"
-            style={inputStyles(1)}
-            onFocus={() => focusHandler(1)}
-            onBlur={() => focusHandler(1)}
-          />
-          <TextInput
-            placeholder="Адреса електронної пошти"
-            inputMode="email"
-            placeholderTextColor="#BDBDBD"
-            style={inputStyles(2)}
-            onFocus={() => focusHandler(2)}
-            onBlur={() => focusHandler(2)}
-          />
-          <View style={{ position: 'relative' }}>
-            <TextInput
-              placeholder="Пароль"
-              placeholderTextColor="#BDBDBD"
-              secureTextEntry={isPasswordShown}
-              style={inputStyles(3)}
-              onFocus={() => focusHandler(3)}
-              onBlur={() => focusHandler(3)}
-            />
-            <TouchableWithoutFeedback
-              onPressOut={passwordShowHandler}
-              onPressIn={passwordShowHandler}
-            >
-              <Text
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <View style={styles.inner}>
+            <View style={styles.avatarBox}>
+              <Image
+                source={require('../img/add.png')}
                 style={{
-                  fontSize: 16,
+                  width: 25,
+                  height: 25,
                   position: 'absolute',
-                  right: 16,
-                  top: 13,
-                  color: '#1B4371',
+                  right: -12,
+                  top: 75,
                 }}
+              />
+            </View>
+            <Text style={styles.header}>Реєстрація</Text>
+            <TextInput
+              placeholder="Логін"
+              inputMode="text"
+              placeholderTextColor="#BDBDBD"
+              style={inputStyles(1)}
+              onFocus={() => focusHandler(1)}
+              onBlur={() => focusHandler(1)}
+            />
+            <TextInput
+              placeholder="Адреса електронної пошти"
+              inputMode="email"
+              placeholderTextColor="#BDBDBD"
+              style={inputStyles(2)}
+              onFocus={() => focusHandler(2)}
+              onBlur={() => focusHandler(2)}
+            />
+            <View style={{ position: 'relative' }}>
+              <TextInput
+                placeholder="Пароль"
+                placeholderTextColor="#BDBDBD"
+                secureTextEntry={isPasswordShown}
+                style={inputStyles(3)}
+                onFocus={() => focusHandler(3)}
+                onBlur={() => focusHandler(3)}
+              />
+              <TouchableWithoutFeedback
+                onPressOut={passwordShowHandler}
+                onPressIn={passwordShowHandler}
               >
-                Показати
-              </Text>
-            </TouchableWithoutFeedback>
-          </View>
-          {!isKeyboardVisible && (
-            <View>
-              <TouchableHighlight>
-                <Text style={styles.btn}>Зареєстуватися</Text>
-              </TouchableHighlight>
-              <TouchableWithoutFeedback>
-                <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    position: 'absolute',
+                    right: 16,
+                    top: 13,
+                    color: '#1B4371',
+                  }}
+                >
+                  Показати
+                </Text>
               </TouchableWithoutFeedback>
             </View>
-          )}
-          {/* <View style={styles.btnContainer}>
-            <Button title="Submit" onPress={() => null} color="#FF6C00" />
-          </View> */}
+            {!isKeyboardVisible && (
+              <View>
+                <TouchableHighlight>
+                  <Text style={styles.btn}>Зареєстуватися</Text>
+                </TouchableHighlight>
+                <TouchableWithoutFeedback>
+                  <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+                </TouchableWithoutFeedback>
+              </View>
+            )}
+          </View>
         </View>
-      </KeyboardAvoidingView>
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 };
