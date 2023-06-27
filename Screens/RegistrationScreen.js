@@ -14,6 +14,7 @@ import {
 import SvgUri from 'react-native-svg-uri';
 import addIcon from '../img/add.svg';
 import { TouchableHighlight } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const RegistrationScreen = () => {
   const [isFocused, setFocus] = useState(false);
@@ -54,15 +55,15 @@ const RegistrationScreen = () => {
   const inputStyles = (inputId) => ({
     ...styles.textInput,
     borderColor: isFocused === inputId ? '#FF6C00' : '#E8E8E8',
+    backgroundColor: isFocused === inputId ? '#ffffff' : '#F6F6F6',
   });
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      {/* <SafeAreaView style={{ flex: 1 }}> */}
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        // behavior="position"
         style={styles.container}
-        // contentContainerStyle={isKeyboardVisible ? { top: 70 } : { top: 0 }}
       >
         <View style={styles.inner}>
           <View style={styles.avatarBox}>
@@ -130,9 +131,6 @@ const RegistrationScreen = () => {
               </TouchableWithoutFeedback>
             </View>
           )}
-          {/* <View style={styles.btnContainer}>
-            <Button title="Submit" onPress={() => null} color="#FF6C00" />
-          </View> */}
         </View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
@@ -146,15 +144,12 @@ const styles = StyleSheet.create({
   },
   inner: {
     padding: 16,
-    // justifyContent: 'space-around',
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    // border: 'none',
   },
   header: {
     textAlign: 'center',
-    // color: 'white',
     fontSize: 30,
     fontWeight: 500,
     marginTop: 92,
@@ -175,7 +170,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 16,
     height: 50,
-    backgroundColor: '#F6F6F6',
     borderWidth: 1,
     marginBottom: 16,
     borderRadius: 5,
