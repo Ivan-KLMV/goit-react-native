@@ -5,6 +5,7 @@ import LoginScreen from './Screens/LoginScreen';
 
 export default function App() {
   return (
+<<<<<<< Updated upstream
     <ImageBackground
       source={require('./img/photo_BG.png')}
       style={{ height: '100%', width: '100%' }}
@@ -25,3 +26,19 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
   },
 });
+=======
+    <SafeAreaProvider>
+      <View style={{ flex: 1, backgroundColor: 'orange' }}>
+        <ImageBackground
+          source={require('./img/photo_BG.png')}
+          style={{ flex: 1 }}
+        >
+          <StatusBar style="auto" />
+          {/* <RegistrationScreen /> */}
+          <LoginScreen />
+        </ImageBackground>
+      </View>
+    </SafeAreaProvider>
+  );
+}
+>>>>>>> Stashed changes
