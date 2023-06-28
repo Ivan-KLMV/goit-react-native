@@ -18,8 +18,8 @@ export default function App() {
         }}
         resizeMode="cover"
       ></ImageBackground>
-      {/* <RegistrationScreen /> */}
-      <LoginScreen />
+      <RegistrationScreen />
+      {/* <LoginScreen /> */}
     </View>
   );
 }
