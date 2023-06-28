@@ -9,12 +9,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Image,
-  TouchableHighlightComponent,
+  TouchableOpacity,
 } from 'react-native';
-import SvgUri from 'react-native-svg-uri';
-import addIcon from '../img/add.svg';
-import { TouchableHighlight } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const RegistrationScreen = () => {
   const [isFocused, setFocus] = useState(false);
@@ -60,11 +56,11 @@ const RegistrationScreen = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      {/* <SafeAreaView style={{ flex: 1 }}> */}
-      <KeyboardAvoidingView
+      <View style={styles.container}>
+        {/* <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
-      >
+      > */}
         <View style={styles.inner}>
           <View style={styles.avatarBox}>
             <Image
@@ -123,16 +119,21 @@ const RegistrationScreen = () => {
           </View>
           {!isKeyboardVisible && (
             <View>
-              <TouchableHighlight>
-                <Text style={styles.btn}>Зареєстуватися</Text>
-              </TouchableHighlight>
+              <TouchableOpacity activeOpacity={0.7}>
+                <View style={styles.btn}>
+                  <Text style={{ color: '#FFFFFF', fontSize: 16 }}>
+                    Зареєстуватися
+                  </Text>
+                </View>
+              </TouchableOpacity>
               <TouchableWithoutFeedback>
                 <Text style={styles.link}>Вже є акаунт? Увійти</Text>
               </TouchableWithoutFeedback>
             </View>
           )}
         </View>
-      </KeyboardAvoidingView>
+        {/* </KeyboardAvoidingView> */}
+      </View>
     </TouchableWithoutFeedback>
   );
 };
@@ -174,16 +175,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderRadius: 5,
   },
-
   btn: {
     marginTop: 27,
     borderRadius: 50,
-    fontSize: 16,
     backgroundColor: '#FF6C00',
-    color: '#FFFFFF',
     paddingBottom: 16,
     paddingTop: 16,
-    textAlign: 'center',
+    alignItems: 'center',
   },
   link: {
     marginTop: 16,
