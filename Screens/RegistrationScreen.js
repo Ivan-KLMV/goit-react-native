@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
 import {
   View,
   KeyboardAvoidingView,
@@ -10,7 +9,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Image,
-  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
 
 const RegistrationScreen = () => {

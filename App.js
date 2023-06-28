@@ -1,20 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import {
-  ImageBackground,
-  StyleSheet,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-  TextInput,
-  Button,
-} from 'react-native';
+import { ImageBackground, View } from 'react-native';
 import RegistrationScreen from './Screens/RegistrationScreen';
 import LoginScreen from './Screens/LoginScreen';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { TouchableHighlight } from 'react-native';
-import { Platform } from 'react-native';
 
 export default function App() {
   return (

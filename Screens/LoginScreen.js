@@ -8,15 +8,8 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  Pressable,
-  Linking,
-  Image,
-  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import SvgUri from 'react-native-svg-uri';
-import addIcon from '../img/add.svg';
-import { TouchableOpacity } from 'react-native';
 
 const LoginScreen = () => {
   const [isFocused, setFocus] = useState(false);
