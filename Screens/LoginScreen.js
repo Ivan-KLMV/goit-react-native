@@ -16,6 +16,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SvgUri from 'react-native-svg-uri';
 import addIcon from '../img/add.svg';
+import { TouchableOpacity } from 'react-native';
 
 const LoginScreen = () => {
   const [isFocused, setFocus] = useState(false);
@@ -61,50 +62,53 @@ const LoginScreen = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={styles.container}>
-          <View style={styles.inner}>
-            <Text style={styles.header}>Увійти</Text>
+      <View style={styles.container}>
+        <View style={styles.inner}>
+          <Text style={styles.header}>Увійти</Text>
+          <TextInput
+            placeholder="Адреса електронної пошти"
+            inputMode="email"
+            placeholderTextColor="#BDBDBD"
+            style={inputStyles(1)}
+            onFocus={() => focusHandler(1)}
+            onBlur={() => focusHandler(1)}
+          />
+          <View style={{ position: 'relative' }}>
             <TextInput
-              placeholder="Адреса електронної пошти"
-              inputMode="email"
+              placeholder="Пароль"
               placeholderTextColor="#BDBDBD"
-              style={inputStyles(1)}
-              onFocus={() => focusHandler(1)}
-              onBlur={() => focusHandler(1)}
+              secureTextEntry={isPasswordShown}
+              style={inputStyles(2)}
+              onFocus={() => focusHandler(2)}
+              onBlur={() => focusHandler(2)}
             />
-            <View style={{ position: 'relative' }}>
-              <TextInput
-                placeholder="Пароль"
-                placeholderTextColor="#BDBDBD"
-                secureTextEntry={isPasswordShown}
-                style={inputStyles(2)}
-                onFocus={() => focusHandler(2)}
-                onBlur={() => focusHandler(2)}
-              />
-              <TouchableWithoutFeedback
-                onPress={passwordShowHandler}
-                onPressIn={passwordShowHandler}
+            <TouchableWithoutFeedback
+              onPress={passwordShowHandler}
+              onPressIn={passwordShowHandler}
+            >
+              <Text
+                style={{
+                  position: 'absolute',
+                  right: 16,
+                  top: 13,
+                  color: '#1B4371',
+                }}
               >
-                <Text
-                  style={{
-                    position: 'absolute',
-                    right: 16,
-                    top: 13,
-                    color: '#1B4371',
-                  }}
-                >
-                  Показати
-                </Text>
-              </TouchableWithoutFeedback>
-            </View>
-            {!isKeyboardVisible && (
+                Показати
+              </Text>
+            </TouchableWithoutFeedback>
+          </View>
+          {!isKeyboardVisible && (
+            <View>
+              <TouchableOpacity activeOpacity={0.7}>
+                <View style={styles.btn}>
+                  <Text style={{ fontSize: 16, color: '#FFFFFF' }}>Увійти</Text>
+                </View>
+              </TouchableOpacity>
               <View>
-                <TouchableHighlight>
-                  <Text style={styles.btn}>Увійти</Text>
-                </TouchableHighlight>
                 <Text style={styles.link}>
                   Немає акаунту?
+                  <View style={{ width: 10 }} />
                   <TouchableWithoutFeedback>
                     <Text style={{ textDecorationLine: 'underline' }}>
                       Зареєструватися
@@ -112,10 +116,10 @@ const LoginScreen = () => {
                   </TouchableWithoutFeedback>
                 </Text>
               </View>
-            )}
-          </View>
+            </View>
+          )}
         </View>
-      </SafeAreaView>
+      </View>
     </TouchableWithoutFeedback>
   );
 };
@@ -148,14 +152,12 @@ const styles = StyleSheet.create({
   },
 
   btn: {
+    alignItems: 'center',
     marginTop: 27,
     borderRadius: 50,
-    fontSize: 16,
     backgroundColor: '#FF6C00',
-    color: '#FFFFFF',
     paddingBottom: 16,
     paddingTop: 16,
-    textAlign: 'center',
   },
 
   link: {

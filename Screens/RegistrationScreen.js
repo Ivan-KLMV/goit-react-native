@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 import {
   View,
   KeyboardAvoidingView,
@@ -9,12 +10,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Image,
-  TouchableHighlightComponent,
   TouchableHighlight,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import SvgUri from 'react-native-svg-uri';
-import addIcon from '../img/add.svg';
 
 const RegistrationScreen = () => {
   const [isFocused, setFocus] = useState(false);
@@ -60,77 +57,84 @@ const RegistrationScreen = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={styles.container}>
-          <View style={styles.inner}>
-            <View style={styles.avatarBox}>
-              <Image
-                source={require('../img/add.png')}
+      <View style={styles.container}>
+        {/* <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.container}
+      > */}
+        <View style={styles.inner}>
+          <View style={styles.avatarBox}>
+            <Image
+              source={require('../img/add.png')}
+              style={{
+                width: 25,
+                height: 25,
+                position: 'absolute',
+                right: -12,
+                top: 75,
+              }}
+            />
+          </View>
+          <Text style={styles.header}>Реєстрація</Text>
+          <TextInput
+            placeholder="Логін"
+            inputMode="text"
+            placeholderTextColor="#BDBDBD"
+            style={inputStyles(1)}
+            onFocus={() => focusHandler(1)}
+            onBlur={() => focusHandler(1)}
+          />
+          <TextInput
+            placeholder="Адреса електронної пошти"
+            inputMode="email"
+            placeholderTextColor="#BDBDBD"
+            style={inputStyles(2)}
+            onFocus={() => focusHandler(2)}
+            onBlur={() => focusHandler(2)}
+          />
+          <View style={{ position: 'relative' }}>
+            <TextInput
+              placeholder="Пароль"
+              placeholderTextColor="#BDBDBD"
+              secureTextEntry={isPasswordShown}
+              style={inputStyles(3)}
+              onFocus={() => focusHandler(3)}
+              onBlur={() => focusHandler(3)}
+            />
+            <TouchableWithoutFeedback
+              onPressOut={passwordShowHandler}
+              onPressIn={passwordShowHandler}
+            >
+              <Text
                 style={{
-                  width: 25,
-                  height: 25,
+                  fontSize: 16,
                   position: 'absolute',
-                  right: -12,
-                  top: 75,
+                  right: 16,
+                  top: 13,
+                  color: '#1B4371',
                 }}
-              />
-            </View>
-            <Text style={styles.header}>Реєстрація</Text>
-            <TextInput
-              placeholder="Логін"
-              inputMode="text"
-              placeholderTextColor="#BDBDBD"
-              style={inputStyles(1)}
-              onFocus={() => focusHandler(1)}
-              onBlur={() => focusHandler(1)}
-            />
-            <TextInput
-              placeholder="Адреса електронної пошти"
-              inputMode="email"
-              placeholderTextColor="#BDBDBD"
-              style={inputStyles(2)}
-              onFocus={() => focusHandler(2)}
-              onBlur={() => focusHandler(2)}
-            />
-            <View style={{ position: 'relative' }}>
-              <TextInput
-                placeholder="Пароль"
-                placeholderTextColor="#BDBDBD"
-                secureTextEntry={isPasswordShown}
-                style={inputStyles(3)}
-                onFocus={() => focusHandler(3)}
-                onBlur={() => focusHandler(3)}
-              />
-              <TouchableWithoutFeedback
-                onPressOut={passwordShowHandler}
-                onPressIn={passwordShowHandler}
               >
-                <Text
-                  style={{
-                    fontSize: 16,
-                    position: 'absolute',
-                    right: 16,
-                    top: 13,
-                    color: '#1B4371',
-                  }}
-                >
-                  Показати
-                </Text>
+                Показати
+              </Text>
+            </TouchableWithoutFeedback>
+          </View>
+          {!isKeyboardVisible && (
+            <View>
+              <TouchableOpacity activeOpacity={0.7}>
+                <View style={styles.btn}>
+                  <Text style={{ color: '#FFFFFF', fontSize: 16 }}>
+                    Зареєстуватися
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableWithoutFeedback>
+                <Text style={styles.link}>Вже є акаунт? Увійти</Text>
               </TouchableWithoutFeedback>
             </View>
-            {!isKeyboardVisible && (
-              <View>
-                <TouchableHighlight>
-                  <Text style={styles.btn}>Зареєстуватися</Text>
-                </TouchableHighlight>
-                <TouchableWithoutFeedback>
-                  <Text style={styles.link}>Вже є акаунт? Увійти</Text>
-                </TouchableWithoutFeedback>
-              </View>
-            )}
-          </View>
+          )}
         </View>
-      </SafeAreaView>
+        {/* </KeyboardAvoidingView> */}
+      </View>
     </TouchableWithoutFeedback>
   );
 };
@@ -172,16 +176,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderRadius: 5,
   },
-
   btn: {
     marginTop: 27,
     borderRadius: 50,
-    fontSize: 16,
     backgroundColor: '#FF6C00',
-    color: '#FFFFFF',
     paddingBottom: 16,
     paddingTop: 16,
-    textAlign: 'center',
+    alignItems: 'center',
   },
   link: {
     marginTop: 16,
