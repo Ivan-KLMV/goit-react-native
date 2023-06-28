@@ -2,8 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { ImageBackground, View } from 'react-native';
 import RegistrationScreen from './Screens/RegistrationScreen';
 import LoginScreen from './Screens/LoginScreen';
+import { useState } from 'react';
 
 export default function App() {
+  const [page, setPage] = useState('reg');
+  const currentPageHandler = (currentPage) => {
+    setPage(currentPage);
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar style="auto" />
@@ -18,8 +24,11 @@ export default function App() {
         }}
         resizeMode="cover"
       ></ImageBackground>
-      <RegistrationScreen />
-      {/* <LoginScreen /> */}
+      {page === 'reg' ? (
+        <RegistrationScreen currentPage={currentPageHandler} />
+      ) : (
+        <LoginScreen currentPage={currentPageHandler} />
+      )}
     </View>
   );
 }

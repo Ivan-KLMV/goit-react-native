@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Pressable } from 'react-native';
 import {
   View,
   KeyboardAvoidingView,
@@ -9,12 +10,15 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 
-const LoginScreen = () => {
+const LoginScreen = ({ currentPage }) => {
   const [isFocused, setFocus] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [isPasswordShown, setPasswordShown] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -38,7 +42,7 @@ const LoginScreen = () => {
   }, []);
 
   const passwordShowHandler = () => {
-    setPasswordShown((state) => !state);
+    setPasswordShown(!isPasswordShown);
   };
 
   const focusHandler = (inputId) => {
@@ -53,6 +57,19 @@ const LoginScreen = () => {
     backgroundColor: isFocused === inputId ? '#ffffff' : '#F6F6F6',
   });
 
+  const onLogin = () => {
+    if (!email || !password) {
+      ToastAndroid.show(
+        'Будь ласка, заповніть всі поля для входу!',
+        ToastAndroid.SHORT
+      );
+      return;
+    }
+    ToastAndroid.show(`Email: ${email}`, ToastAndroid.SHORT);
+    console.log('Email', email);
+    console.log('Password', password);
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -60,6 +77,8 @@ const LoginScreen = () => {
           <Text style={styles.header}>Увійти</Text>
           <TextInput
             placeholder="Адреса електронної пошти"
+            value={email}
+            onChangeText={setEmail}
             inputMode="email"
             placeholderTextColor="#BDBDBD"
             style={inputStyles(1)}
@@ -69,6 +88,8 @@ const LoginScreen = () => {
           <View style={{ position: 'relative' }}>
             <TextInput
               placeholder="Пароль"
+              value={password}
+              onChangeText={setPassword}
               placeholderTextColor="#BDBDBD"
               secureTextEntry={isPasswordShown}
               style={inputStyles(2)}
@@ -77,7 +98,7 @@ const LoginScreen = () => {
             />
             <TouchableWithoutFeedback
               onPress={passwordShowHandler}
-              onPressIn={passwordShowHandler}
+              // onPressIn={passwordShowHandler}
             >
               <Text
                 style={{
@@ -87,27 +108,53 @@ const LoginScreen = () => {
                   color: '#1B4371',
                 }}
               >
-                Показати
+                {isPasswordShown ? 'Показати' : 'Сховати'}
               </Text>
             </TouchableWithoutFeedback>
           </View>
           {!isKeyboardVisible && (
             <View>
-              <TouchableOpacity activeOpacity={0.7}>
+              <TouchableOpacity activeOpacity={0.7} onPress={onLogin}>
                 <View style={styles.btn}>
                   <Text style={{ fontSize: 16, color: '#FFFFFF' }}>Увійти</Text>
                 </View>
               </TouchableOpacity>
-              <View>
-                <Text style={styles.link}>
+              <View
+                style={{
+                  marginBottom: 111,
+                  marginTop: 16,
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text
+                  style={{
+                    ...styles.link,
+                    marginRight: 5,
+                  }}
+                >
                   Немає акаунту?
-                  <View style={{ width: 10 }} />
-                  <TouchableWithoutFeedback>
-                    <Text style={{ textDecorationLine: 'underline' }}>
-                      Зареєструватися
-                    </Text>
-                  </TouchableWithoutFeedback>
                 </Text>
+                <Pressable
+                  onPress={() => {
+                    currentPage('reg');
+                  }}
+                  style={({ pressed }) => [
+                    {
+                      backgroundColor: pressed ? '#d3d3d3' : '',
+                      borderRadius: 5,
+                    },
+                  ]}
+                >
+                  <Text
+                    style={{
+                      ...styles.link,
+                      textDecorationLine: 'underline',
+                    }}
+                  >
+                    Зареєструватися
+                  </Text>
+                </Pressable>
               </View>
             </View>
           )}
@@ -154,11 +201,8 @@ const styles = StyleSheet.create({
   },
 
   link: {
-    marginTop: 16,
     color: '#1B4371',
     fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 111,
   },
 });
 

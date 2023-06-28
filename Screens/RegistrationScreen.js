@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ToastAndroid } from 'react-native';
 import {
   View,
   KeyboardAvoidingView,
@@ -10,12 +11,16 @@ import {
   Keyboard,
   Image,
   TouchableOpacity,
+  TouchableHighlight,
 } from 'react-native';
 
-const RegistrationScreen = () => {
+const RegistrationScreen = ({ currentPage }) => {
   const [isFocused, setFocus] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [isPasswordShown, setPasswordShown] = useState(true);
+  const [login, setLogin] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -54,6 +59,24 @@ const RegistrationScreen = () => {
     backgroundColor: isFocused === inputId ? '#ffffff' : '#F6F6F6',
   });
 
+  const onLogin = () => {
+    if (!login || !email || !password) {
+      ToastAndroid.show(
+        'Будь ласка, заповніть всі поля для реєстрації!',
+        ToastAndroid.SHORT
+      );
+      return;
+    }
+    ToastAndroid.show(
+      `Login: ${login}
+     Email: ${email}`,
+      ToastAndroid.SHORT
+    );
+    console.log('Login', login);
+    console.log('Email', email);
+    console.log('Password', password);
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -77,6 +100,8 @@ const RegistrationScreen = () => {
           <Text style={styles.header}>Реєстрація</Text>
           <TextInput
             placeholder="Логін"
+            value={login}
+            onChangeText={setLogin}
             inputMode="text"
             placeholderTextColor="#BDBDBD"
             style={inputStyles(1)}
@@ -85,6 +110,8 @@ const RegistrationScreen = () => {
           />
           <TextInput
             placeholder="Адреса електронної пошти"
+            value={email}
+            onChangeText={setEmail}
             inputMode="email"
             placeholderTextColor="#BDBDBD"
             style={inputStyles(2)}
@@ -94,6 +121,8 @@ const RegistrationScreen = () => {
           <View style={{ position: 'relative' }}>
             <TextInput
               placeholder="Пароль"
+              value={password}
+              onChangeText={setPassword}
               placeholderTextColor="#BDBDBD"
               secureTextEntry={isPasswordShown}
               style={inputStyles(3)}
@@ -101,8 +130,8 @@ const RegistrationScreen = () => {
               onBlur={() => focusHandler(3)}
             />
             <TouchableWithoutFeedback
-              onPressOut={passwordShowHandler}
-              onPressIn={passwordShowHandler}
+              onPress={passwordShowHandler}
+              // onPressIn={passwordShowHandler}
             >
               <Text
                 style={{
@@ -113,22 +142,37 @@ const RegistrationScreen = () => {
                   color: '#1B4371',
                 }}
               >
-                Показати
+                {isPasswordShown ? 'Показати' : 'Сховати'}
               </Text>
             </TouchableWithoutFeedback>
           </View>
           {!isKeyboardVisible && (
             <View>
-              <TouchableOpacity activeOpacity={0.7}>
+              <TouchableOpacity activeOpacity={0.7} onPress={onLogin}>
                 <View style={styles.btn}>
                   <Text style={{ color: '#FFFFFF', fontSize: 16 }}>
                     Зареєстуватися
                   </Text>
                 </View>
               </TouchableOpacity>
-              <TouchableWithoutFeedback>
-                <Text style={styles.link}>Вже є акаунт? Увійти</Text>
-              </TouchableWithoutFeedback>
+              <View
+                style={{
+                  marginBottom: 45,
+                  marginTop: 16,
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}
+              >
+                <TouchableHighlight
+                  underlayColor="#d3d3d3"
+                  onPress={() => {
+                    currentPage('log');
+                  }}
+                  style={{ borderRadius: 5 }}
+                >
+                  <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+                </TouchableHighlight>
+              </View>
             </View>
           )}
         </View>
@@ -184,11 +228,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   link: {
-    marginTop: 16,
     color: '#1B4371',
     fontSize: 16,
     textAlign: 'center',
-    marginBottom: 45,
   },
 });
 
