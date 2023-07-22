@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Pressable } from 'react-native';
 import {
@@ -19,6 +20,7 @@ const LoginScreen = ({ currentPage }) => {
   const [isPasswordShown, setPasswordShown] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -136,9 +138,10 @@ const LoginScreen = ({ currentPage }) => {
                   Немає акаунту?
                 </Text>
                 <Pressable
-                  onPress={() => {
-                    currentPage('reg');
-                  }}
+                  // onPress={() => {
+                  //   currentPage('reg');
+                  // }}
+                  onPress={() => navigation.navigate('RegistrationScreen')}
                   style={({ pressed }) => [
                     {
                       backgroundColor: pressed ? '#d3d3d3' : '',

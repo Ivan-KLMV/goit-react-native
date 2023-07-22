@@ -14,7 +14,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-const RegistrationScreen = ({ currentPage }) => {
+const RegistrationScreen = ({ currentPage, navigation }) => {
   const [isFocused, setFocus] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [isPasswordShown, setPasswordShown] = useState(true);
@@ -165,9 +165,10 @@ const RegistrationScreen = ({ currentPage }) => {
               >
                 <TouchableHighlight
                   underlayColor="#d3d3d3"
-                  onPress={() => {
-                    currentPage('log');
-                  }}
+                  // onPress={() => {
+                  //   currentPage('log');
+                  // }}
+                  onPress={() => navigation.navigate('LoginScreen')}
                   style={{ borderRadius: 5 }}
                 >
                   <Text style={styles.link}>Вже є акаунт? Увійти</Text>
