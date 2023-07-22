@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ToastAndroid } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
   View,
   KeyboardAvoidingView,
@@ -14,13 +15,18 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-const RegistrationScreen = ({ currentPage, navigation }) => {
+import StartScreenBackground from '../components/StartScreenBackground';
+
+const RegistrationScreen = (props) => {
   const [isFocused, setFocus] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [isPasswordShown, setPasswordShown] = useState(true);
   const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
+
+  const { myProp } = props.route.params;
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -75,111 +81,115 @@ const RegistrationScreen = ({ currentPage, navigation }) => {
     console.log('Login', login);
     console.log('Email', email);
     console.log('Password', password);
+
+    myProp(true);
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        {/* <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.container}
-      > */}
-        <View style={styles.inner}>
-          <View style={styles.avatarBox}>
-            <Image
-              source={require('../img/add.png')}
-              style={{
-                width: 25,
-                height: 25,
-                position: 'absolute',
-                right: -12,
-                top: 75,
-              }}
-            />
-          </View>
-          <Text style={styles.header}>Реєстрація</Text>
-          <TextInput
-            placeholder="Логін"
-            value={login}
-            onChangeText={setLogin}
-            inputMode="text"
-            placeholderTextColor="#BDBDBD"
-            style={inputStyles(1)}
-            onFocus={() => focusHandler(1)}
-            onBlur={() => focusHandler(1)}
-          />
-          <TextInput
-            placeholder="Адреса електронної пошти"
-            value={email}
-            onChangeText={setEmail}
-            inputMode="email"
-            placeholderTextColor="#BDBDBD"
-            style={inputStyles(2)}
-            onFocus={() => focusHandler(2)}
-            onBlur={() => focusHandler(2)}
-          />
-          <View style={{ position: 'relative' }}>
-            <TextInput
-              placeholder="Пароль"
-              value={password}
-              onChangeText={setPassword}
-              placeholderTextColor="#BDBDBD"
-              secureTextEntry={isPasswordShown}
-              style={inputStyles(3)}
-              onFocus={() => focusHandler(3)}
-              onBlur={() => focusHandler(3)}
-            />
-            <TouchableWithoutFeedback
-              onPress={passwordShowHandler}
-              // onPressIn={passwordShowHandler}
-            >
-              <Text
+    <StartScreenBackground>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          {/* <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}
+    > */}
+          <View style={styles.inner}>
+            <View style={styles.avatarBox}>
+              <Image
+                source={require('../img/add.png')}
                 style={{
-                  fontSize: 16,
+                  width: 25,
+                  height: 25,
                   position: 'absolute',
-                  right: 16,
-                  top: 13,
-                  color: '#1B4371',
+                  right: -12,
+                  top: 75,
                 }}
-              >
-                {isPasswordShown ? 'Показати' : 'Сховати'}
-              </Text>
-            </TouchableWithoutFeedback>
-          </View>
-          {!isKeyboardVisible && (
-            <View>
-              <TouchableOpacity activeOpacity={0.7} onPress={onLogin}>
-                <View style={styles.btn}>
-                  <Text style={{ color: '#FFFFFF', fontSize: 16 }}>
-                    Зареєстуватися
-                  </Text>
-                </View>
-              </TouchableOpacity>
-              <View
-                style={{
-                  marginBottom: 45,
-                  marginTop: 16,
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                }}
-              >
-                <TouchableHighlight
-                  underlayColor="#d3d3d3"
-                  // onPress={() => {
-                  //   currentPage('log');
-                  // }}
-                  onPress={() => navigation.navigate('LoginScreen')}
-                  style={{ borderRadius: 5 }}
-                >
-                  <Text style={styles.link}>Вже є акаунт? Увійти</Text>
-                </TouchableHighlight>
-              </View>
+              />
             </View>
-          )}
+            <Text style={styles.header}>Реєстрація</Text>
+            <TextInput
+              placeholder="Логін"
+              value={login}
+              onChangeText={setLogin}
+              inputMode="text"
+              placeholderTextColor="#BDBDBD"
+              style={inputStyles(1)}
+              onFocus={() => focusHandler(1)}
+              onBlur={() => focusHandler(1)}
+            />
+            <TextInput
+              placeholder="Адреса електронної пошти"
+              value={email}
+              onChangeText={setEmail}
+              inputMode="email"
+              placeholderTextColor="#BDBDBD"
+              style={inputStyles(2)}
+              onFocus={() => focusHandler(2)}
+              onBlur={() => focusHandler(2)}
+            />
+            <View style={{ position: 'relative' }}>
+              <TextInput
+                placeholder="Пароль"
+                value={password}
+                onChangeText={setPassword}
+                placeholderTextColor="#BDBDBD"
+                secureTextEntry={isPasswordShown}
+                style={inputStyles(3)}
+                onFocus={() => focusHandler(3)}
+                onBlur={() => focusHandler(3)}
+              />
+              <TouchableWithoutFeedback
+                onPress={passwordShowHandler}
+                // onPressIn={passwordShowHandler}
+              >
+                <Text
+                  style={{
+                    fontSize: 16,
+                    position: 'absolute',
+                    right: 16,
+                    top: 13,
+                    color: '#1B4371',
+                  }}
+                >
+                  {isPasswordShown ? 'Показати' : 'Сховати'}
+                </Text>
+              </TouchableWithoutFeedback>
+            </View>
+            {!isKeyboardVisible && (
+              <View>
+                <TouchableOpacity activeOpacity={0.7} onPress={onLogin}>
+                  <View style={styles.btn}>
+                    <Text style={{ color: '#FFFFFF', fontSize: 16 }}>
+                      Зареєстуватися
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    marginBottom: 45,
+                    marginTop: 16,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <TouchableHighlight
+                    underlayColor="#d3d3d3"
+                    // onPress={() => {
+                    //   currentPage('log');
+                    // }}
+                    onPress={() => navigation.navigate('LoginScreen')}
+                    style={{ borderRadius: 5 }}
+                  >
+                    <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+                  </TouchableHighlight>
+                </View>
+              </View>
+            )}
+          </View>
+          {/* </KeyboardAvoidingView> */}
         </View>
-        {/* </KeyboardAvoidingView> */}
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </StartScreenBackground>
   );
 };
 
