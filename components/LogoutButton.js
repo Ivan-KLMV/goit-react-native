@@ -1,7 +1,6 @@
 const { Image, TouchableOpacity, View } = require('react-native');
 
 const LogoutButton = ({ myProp }) => {
-  console.log('LogoutButton', myProp);
   return (
     <View>
       <TouchableOpacity
