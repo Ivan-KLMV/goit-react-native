@@ -10,7 +10,6 @@ const Tab = createBottomTabNavigator();
 
 const HomePage = (props) => {
   const { loginHandler } = props.route.params;
-  console.log('HomePage', loginHandler);
 
   return (
     <Tab.Navigator
