@@ -132,10 +132,7 @@ const RegistrationScreen = (props) => {
                 onFocus={() => focusHandler(3)}
                 onBlur={() => focusHandler(3)}
               />
-              <TouchableWithoutFeedback
-                onPress={passwordShowHandler}
-                // onPressIn={passwordShowHandler}
-              >
+              <TouchableWithoutFeedback onPress={passwordShowHandler}>
                 <Text
                   style={{
                     fontSize: 16,
@@ -168,9 +165,6 @@ const RegistrationScreen = (props) => {
                 >
                   <TouchableHighlight
                     underlayColor="#d3d3d3"
-                    // onPress={() => {
-                    //   currentPage('log');
-                    // }}
                     onPress={() => navigation.navigate('LoginScreen')}
                     style={{ borderRadius: 5 }}
                   >

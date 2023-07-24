@@ -4,7 +4,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import PostScreen from './PostsScreen';
 import CreatePostsScreen from './CreatePostsScreen';
 import ProfileScreen from './ProfileScreen';
-import ExitButton from '../components/ExitButton';
+import LogOutButton from '../components/LogOutButton';
+import GridSvgComponent from '../components/GridSvgComponent';
+import UserSvgComponent from '../components/UserSvgComponent';
+import NewPostSvgComponent from '../components/NewPostSvgComponent';
+import ArrowLeftSvgComponent from '../components/ArrowLeftSvgComponent';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,14 +20,13 @@ const HomePage = (props) => {
       initialRouteName="PostScreen"
       screenOptions={{
         tabBarShowLabel: false,
-        tabBarStyle: { height: 45 },
+        tabBarStyle: { height: 60 },
         headerTitleAlign: 'center',
         headerTitleStyle: {
           fontSize: 17,
         },
         headerStyle: {
           borderBottomWidth: 1,
-          borderBottomColor: 'rgba(0, 0, 0, 0.30)',
         },
       }}
     >
@@ -31,11 +34,28 @@ const HomePage = (props) => {
         name="Публікації"
         component={PostScreen}
         options={{
-          headerRight: () => <ExitButton myProp={loginHandler} />,
+          tabBarIcon: () => <GridSvgComponent />,
+          headerRight: () => <LogOutButton myProp={loginHandler} />,
         }}
       />
-      <Tab.Screen name="Створити публікацію" component={CreatePostsScreen} />
-      <Tab.Screen name="Профіль" component={ProfileScreen} />
+      <Tab.Screen
+        name="Створити публікацію"
+        component={CreatePostsScreen}
+        options={{
+          tabBarIcon: () => <NewPostSvgComponent />,
+          tabBarStyle: { display: 'none' },
+          headerLeft: () => <ArrowLeftSvgComponent />,
+        }}
+      />
+      <Tab.Screen
+        name="Профіль"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: () => <UserSvgComponent />,
+          tabBarStyle: { display: 'none' },
+          headerLeft: () => <ArrowLeftSvgComponent />,
+        }}
+      />
     </Tab.Navigator>
   );
 };

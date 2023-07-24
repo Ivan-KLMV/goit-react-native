@@ -23,7 +23,7 @@ export default function App() {
       {isLogined ? (
         <MainStack.Navigator>
           <MainStack.Screen
-            name="Публікації"
+            name="HomePage"
             component={HomePage}
             options={{
               headerShown: false,
