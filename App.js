@@ -5,7 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import RegistrationScreen from './Screens/RegistrationScreen';
 import LoginScreen from './Screens/LoginScreen';
 import PostScreen from './Screens/PostsScreen';
-import LogoutButton from './components/LogoutButton';
 import HomePage from './Screens/HomePage';
 
 export default function App() {
