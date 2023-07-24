@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 
 import StartScreenBackground from '../components/StartScreenBackground';
+import AddSvgComponent from '../components/AddSvgComponent';
 
 const RegistrationScreen = (props) => {
   const [isFocused, setFocus] = useState(false);
@@ -95,15 +96,8 @@ const RegistrationScreen = (props) => {
     > */}
           <View style={styles.inner}>
             <View style={styles.avatarBox}>
-              <Image
-                source={require('../img/add.png')}
-                style={{
-                  width: 25,
-                  height: 25,
-                  position: 'absolute',
-                  right: -12,
-                  top: 75,
-                }}
+              <AddSvgComponent
+                style={{ position: 'absolute', right: -12, top: 75 }}
               />
             </View>
             <Text style={styles.header}>Реєстрація</Text>
