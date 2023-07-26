@@ -1,6 +1,6 @@
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import CameraSvgComponent from '../components/CameraSvgComponent';
-import TrashSvgComponent from '../components/TrashSvgComponent';
+import { CameraSvgComponent, TrashSvgComponent } from '../components/SVGs';
+import MapPinSvgComponent from '../components/SVGs/MapPinSvgComponent';
 
 const CreatePostsScreen = () => {
   return (
@@ -68,18 +68,21 @@ const CreatePostsScreen = () => {
                 marginBottom: 16,
               }}
             />
-            <TextInput
-              placeholder="Місцевість..."
-              placeholderTextColor="#BDBDBD"
-              style={{
-                fontSize: 16,
-                paddingTop: 16,
-                paddingBottom: 15,
-                borderBottomWidth: 1,
-                borderBottomColor: '#E8E8E8',
-                marginBottom: 16,
-              }}
-            />
+            <View style={{ position: 'relative' }}>
+              <MapPinSvgComponent style={{ position: 'absolute' }} />
+              <TextInput
+                placeholder="Місцевість..."
+                placeholderTextColor="#BDBDBD"
+                style={{
+                  fontSize: 16,
+                  paddingTop: 16,
+                  paddingBottom: 15,
+                  borderBottomWidth: 1,
+                  borderBottomColor: '#E8E8E8',
+                  marginBottom: 16,
+                }}
+              />
+            </View>
           </View>
           <TouchableOpacity activeOpacity={0.7}>
             <View
