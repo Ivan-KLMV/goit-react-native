@@ -5,10 +5,12 @@ import PostScreen from './PostsScreen';
 import CreatePostsScreen from './CreatePostsScreen';
 import ProfileScreen from './ProfileScreen';
 import LogOutButton from '../components/LogOutButton';
-import GridSvgComponent from '../components/GridSvgComponent';
-import UserSvgComponent from '../components/UserSvgComponent';
-import NewPostSvgComponent from '../components/NewPostSvgComponent';
-import ArrowLeftSvgComponent from '../components/ArrowLeftSvgComponent';
+import {
+  GridSvgComponent,
+  UserSvgComponent,
+  NewPostSvgComponent,
+  ArrowLeftSvgComponent,
+} from '../components/SVGs';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +37,7 @@ const HomePage = (props) => {
         component={PostScreen}
         options={{
           tabBarIcon: () => <GridSvgComponent />,
-          headerRight: () => <LogOutButton myProp={loginHandler} />,
+          headerRight: () => <LogOutButton loginHandler={loginHandler} />,
         }}
       />
       <Tab.Screen
@@ -50,9 +52,11 @@ const HomePage = (props) => {
       <Tab.Screen
         name="Профіль"
         component={ProfileScreen}
+        initialParams={{ loginHandler }}
         options={{
           tabBarIcon: () => <UserSvgComponent />,
-          tabBarStyle: { display: 'none' },
+          headerShown: false,
+          // tabBarStyle: { display: 'none' },
           headerLeft: () => <ArrowLeftSvgComponent />,
         }}
       />
