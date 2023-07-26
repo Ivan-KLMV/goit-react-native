@@ -3,20 +3,17 @@ import { ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {
   View,
-  KeyboardAvoidingView,
   TextInput,
   StyleSheet,
   Text,
-  Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  Image,
   TouchableOpacity,
   TouchableHighlight,
 } from 'react-native';
 
 import StartScreenBackground from '../components/StartScreenBackground';
-import AddSvgComponent from '../components/AddSvgComponent';
+import { AddSvgComponent } from '../components/SVGs';
 
 const RegistrationScreen = (props) => {
   const [isFocused, setFocus] = useState(false);
@@ -27,7 +24,7 @@ const RegistrationScreen = (props) => {
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
-  const { myProp } = props.route.params;
+  const { loginHandler } = props.route.params;
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -83,20 +80,17 @@ const RegistrationScreen = (props) => {
     console.log('Email', email);
     console.log('Password', password);
 
-    myProp(true);
+    loginHandler(true);
   };
 
   return (
     <StartScreenBackground>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          {/* <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
-    > */}
           <View style={styles.inner}>
             <View style={styles.avatarBox}>
               <AddSvgComponent
+                fill="#FF6C00"
                 style={{ position: 'absolute', right: -12, top: 75 }}
               />
             </View>
@@ -174,7 +168,6 @@ const RegistrationScreen = (props) => {
               </View>
             )}
           </View>
-          {/* </KeyboardAvoidingView> */}
         </View>
       </TouchableWithoutFeedback>
     </StartScreenBackground>
