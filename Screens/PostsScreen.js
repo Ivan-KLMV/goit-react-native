@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { Text } from 'react-native';
 import { View } from 'react-native';
 
@@ -21,7 +21,24 @@ const PostScreen = () => {
               borderRadius: 16,
               backgroundColor: 'green',
             }}
-          />
+          >
+            <View
+              style={{
+                width: 60,
+                height: 60,
+                overflow: 'hidden',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 16,
+              }}
+            >
+              <Image
+                source={require('../img/userPhoto.jpg')}
+                resizeMode="contain"
+                style={{ width: 70 }}
+              />
+            </View>
+          </View>
           <View style={{ flexDirection: 'column', marginLeft: 8 }}>
             <Text style={styles.userName}>Natali Romanova</Text>
             <Text style={styles.userEmail}>email@example.com</Text>
