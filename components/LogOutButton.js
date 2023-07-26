@@ -1,8 +1,9 @@
-import LogOutSvgComponent from './LogOutSvgComponent';
+import React from 'react';
+import { TouchableOpacity, View } from 'react-native';
 
-const { TouchableOpacity, View } = require('react-native');
+import { LogOutSvgComponent } from './SVGs';
 
-const LogOutButton = ({ myProp }) => {
+const LogOutButton = ({ loginHandler }) => {
   return (
     <View>
       <TouchableOpacity
@@ -15,7 +16,7 @@ const LogOutButton = ({ myProp }) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        onPress={() => myProp(false)}
+        onPress={() => loginHandler(false)}
       >
         <LogOutSvgComponent />
       </TouchableOpacity>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, { G, Rect, Path, Defs, ClipPath } from 'react-native-svg';
 
-function NewPostSvgComponent(props) {
+export function NewPostSvgComponent(props) {
   return (
     <Svg
       width={70}
@@ -28,5 +28,3 @@ function NewPostSvgComponent(props) {
     </Svg>
   );
 }
-
-export default NewPostSvgComponent;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, { G, Path } from 'react-native-svg';
 
-function LogOutSvgComponent(props) {
+export function LogOutSvgComponent(props) {
   return (
     <Svg
       width={24}
@@ -17,5 +17,3 @@ function LogOutSvgComponent(props) {
     </Svg>
   );
 }
-
-export default LogOutSvgComponent;

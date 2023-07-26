@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, { G, Path, Defs, ClipPath } from 'react-native-svg';
 
-function CameraSvgComponent(props) {
+export function CameraSvgComponent(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -23,5 +23,3 @@ function CameraSvgComponent(props) {
     </Svg>
   );
 }
-
-export default CameraSvgComponent;

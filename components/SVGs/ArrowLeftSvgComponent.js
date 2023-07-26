@@ -3,7 +3,7 @@ import * as React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Svg, { G, Path } from 'react-native-svg';
 
-function ArrowLeftSvgComponent(props) {
+export function ArrowLeftSvgComponent(props) {
   const navigation = useNavigation();
 
   return (
@@ -41,5 +41,3 @@ function ArrowLeftSvgComponent(props) {
     </View>
   );
 }
-
-export default ArrowLeftSvgComponent;
