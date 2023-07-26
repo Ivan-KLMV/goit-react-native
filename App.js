@@ -37,7 +37,7 @@ export default function App() {
             name="RegistrationScreen"
             component={RegistrationScreen}
             options={{ headerShown: false }}
-            initialParams={{ myProp: loginHandler }}
+            initialParams={{ loginHandler }}
           />
           <MainStack.Screen
             name="LoginScreen"
