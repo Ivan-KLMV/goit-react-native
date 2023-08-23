@@ -53,7 +53,6 @@ const ProfileScreen = (props) => {
 
             <PostCard />
           </View>
-          {/* </KeyboardAvoidingView> */}
         </View>
       </TouchableWithoutFeedback>
     </StartScreenBackground>
