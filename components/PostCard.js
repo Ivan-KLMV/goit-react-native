@@ -2,8 +2,11 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import ComentMessageSvgComponent from './SVGs/ComentMessageSvgComponent';
 import ThumbsUpSvgComponent from './SVGs/ThumbsUpSvgComponent';
 import MapPinSvgComponent from './SVGs/MapPinSvgComponent';
+import { Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 const PostCard = () => {
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -32,16 +35,22 @@ const PostCard = () => {
           </View>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <MapPinSvgComponent style={{ marginRight: 8 }} />
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: 400,
-              textDecorationLine: 'underline',
+          <Pressable
+            onPress={() => {
+              console.log(navigation.navigate('MapScreen'));
             }}
           >
-            Ukraine
-          </Text>
+            <MapPinSvgComponent style={{ marginRight: 8 }} />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: 400,
+                textDecorationLine: 'underline',
+              }}
+            >
+              Ukraine
+            </Text>
+          </Pressable>
         </View>
       </View>
     </View>
