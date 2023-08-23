@@ -6,6 +6,7 @@ import RegistrationScreen from './Screens/RegistrationScreen';
 import LoginScreen from './Screens/LoginScreen';
 import PostScreen from './Screens/PostsScreen';
 import HomePage from './Screens/HomePage';
+import MapScreen from './Screens/MapScreen';
 
 export default function App() {
   const [isLogined, setIslogined] = useState(true);
@@ -30,6 +31,7 @@ export default function App() {
             }}
             initialParams={{ loginHandler }}
           />
+          <MainStack.Screen name="MapScreen" component={MapScreen} />
         </MainStack.Navigator>
       ) : (
         <MainStack.Navigator initialRouteName="RegistrationScreen">
