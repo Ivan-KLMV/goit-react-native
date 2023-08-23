@@ -69,7 +69,9 @@ const CreatePostsScreen = () => {
               }}
             />
             <View style={{ position: 'relative' }}>
-              <MapPinSvgComponent style={{ position: 'absolute' }} />
+              <MapPinSvgComponent
+                style={{ position: 'absolute', bottom: 35 }}
+              />
               <TextInput
                 placeholder="Місцевість..."
                 placeholderTextColor="#BDBDBD"
@@ -77,6 +79,7 @@ const CreatePostsScreen = () => {
                   fontSize: 16,
                   paddingTop: 16,
                   paddingBottom: 15,
+                  paddingLeft: 30,
                   borderBottomWidth: 1,
                   borderBottomColor: '#E8E8E8',
                   marginBottom: 16,
