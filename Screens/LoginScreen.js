@@ -13,8 +13,9 @@ import {
   TouchableOpacity,
   ToastAndroid,
 } from 'react-native';
+import StartScreenBackground from '../components/StartScreenBackground';
 
-const LoginScreen = ({ currentPage }) => {
+const LoginScreen = () => {
   const [isFocused, setFocus] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [isPasswordShown, setPasswordShown] = useState(true);
@@ -73,97 +74,101 @@ const LoginScreen = ({ currentPage }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <View style={styles.inner}>
-          <Text style={styles.header}>Увійти</Text>
-          <TextInput
-            placeholder="Адреса електронної пошти"
-            value={email}
-            onChangeText={setEmail}
-            inputMode="email"
-            placeholderTextColor="#BDBDBD"
-            style={inputStyles(1)}
-            onFocus={() => focusHandler(1)}
-            onBlur={() => focusHandler(1)}
-          />
-          <View style={{ position: 'relative' }}>
+    <StartScreenBackground>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <View style={styles.inner}>
+            <Text style={styles.header}>Увійти</Text>
             <TextInput
-              placeholder="Пароль"
-              value={password}
-              onChangeText={setPassword}
+              placeholder="Адреса електронної пошти"
+              value={email}
+              onChangeText={setEmail}
+              inputMode="email"
               placeholderTextColor="#BDBDBD"
-              secureTextEntry={isPasswordShown}
-              style={inputStyles(2)}
-              onFocus={() => focusHandler(2)}
-              onBlur={() => focusHandler(2)}
+              style={inputStyles(1)}
+              onFocus={() => focusHandler(1)}
+              onBlur={() => focusHandler(1)}
             />
-            <TouchableWithoutFeedback
-              onPress={passwordShowHandler}
-              // onPressIn={passwordShowHandler}
-            >
-              <Text
-                style={{
-                  position: 'absolute',
-                  right: 16,
-                  top: 13,
-                  color: '#1B4371',
-                }}
-              >
-                {isPasswordShown ? 'Показати' : 'Сховати'}
-              </Text>
-            </TouchableWithoutFeedback>
-          </View>
-          {!isKeyboardVisible && (
-            <View>
-              <TouchableOpacity activeOpacity={0.7} onPress={onLogin}>
-                <View style={styles.btn}>
-                  <Text style={{ fontSize: 16, color: '#FFFFFF' }}>Увійти</Text>
-                </View>
-              </TouchableOpacity>
-              <View
-                style={{
-                  marginBottom: 111,
-                  marginTop: 16,
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                }}
+            <View style={{ position: 'relative' }}>
+              <TextInput
+                placeholder="Пароль"
+                value={password}
+                onChangeText={setPassword}
+                placeholderTextColor="#BDBDBD"
+                secureTextEntry={isPasswordShown}
+                style={inputStyles(2)}
+                onFocus={() => focusHandler(2)}
+                onBlur={() => focusHandler(2)}
+              />
+              <TouchableWithoutFeedback
+                onPress={passwordShowHandler}
+                // onPressIn={passwordShowHandler}
               >
                 <Text
                   style={{
-                    ...styles.link,
-                    marginRight: 5,
+                    position: 'absolute',
+                    right: 16,
+                    top: 13,
+                    color: '#1B4371',
                   }}
                 >
-                  Немає акаунту?
+                  {isPasswordShown ? 'Показати' : 'Сховати'}
                 </Text>
-                <Pressable
-                  // onPress={() => {
-                  //   currentPage('reg');
-                  // }}
-                  onPress={() => navigation.navigate('RegistrationScreen')}
-                  style={({ pressed }) => [
-                    {
-                      backgroundColor: pressed ? '#d3d3d3' : '',
-                      borderRadius: 5,
-                    },
-                  ]}
+              </TouchableWithoutFeedback>
+            </View>
+            {!isKeyboardVisible && (
+              <View>
+                <TouchableOpacity activeOpacity={0.7} onPress={onLogin}>
+                  <View style={styles.btn}>
+                    <Text style={{ fontSize: 16, color: '#FFFFFF' }}>
+                      Увійти
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    marginBottom: 111,
+                    marginTop: 16,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                  }}
                 >
                   <Text
                     style={{
                       ...styles.link,
-                      textDecorationLine: 'underline',
+                      marginRight: 5,
                     }}
                   >
-                    Зареєструватися
+                    Немає акаунту?
                   </Text>
-                </Pressable>
+                  <Pressable
+                    // onPress={() => {
+                    //   currentPage('reg');
+                    // }}
+                    onPress={() => navigation.navigate('RegistrationScreen')}
+                    style={({ pressed }) => [
+                      {
+                        backgroundColor: pressed ? '#d3d3d3' : '',
+                        borderRadius: 5,
+                      },
+                    ]}
+                  >
+                    <Text
+                      style={{
+                        ...styles.link,
+                        textDecorationLine: 'underline',
+                      }}
+                    >
+                      Зареєструватися
+                    </Text>
+                  </Pressable>
+                </View>
               </View>
-            </View>
-          )}
+            )}
+          </View>
         </View>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </StartScreenBackground>
   );
 };
 
