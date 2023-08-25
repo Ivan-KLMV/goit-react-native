@@ -11,6 +11,7 @@ import {
   NewPostSvgComponent,
   ArrowLeftSvgComponent,
 } from '../components/SVGs';
+import CameraScreen from './CameraScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -43,6 +44,7 @@ const HomePage = (props) => {
       <Tab.Screen
         name="Створити публікацію"
         component={CreatePostsScreen}
+        // component={CameraScreen}
         options={{
           tabBarIcon: () => <NewPostSvgComponent />,
           tabBarStyle: { display: 'none' },
