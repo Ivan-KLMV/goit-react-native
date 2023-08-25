@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import RegistrationScreen from './Screens/RegistrationScreen';
 import LoginScreen from './Screens/LoginScreen';
-import PostScreen from './Screens/PostsScreen';
+// import PostScreen from './Screens/PostsScreen';
 import HomePage from './Screens/HomePage';
 import MapScreen from './Screens/MapScreen';
 
@@ -45,6 +45,7 @@ export default function App() {
             name="LoginScreen"
             component={LoginScreen}
             options={{ headerShown: false }}
+            initialParams={{ loginHandler }}
           />
         </MainStack.Navigator>
       )}
