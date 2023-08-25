@@ -1,9 +1,20 @@
+import React, { useEffect, useState } from 'react';
+
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet } from 'react-native';
 import { Text } from 'react-native';
 import { View } from 'react-native';
 
 const PostScreen = () => {
+  useEffect(() => {
+    console.log('PostScreen mounted');
+
+    return () => {
+      console.log('PostScreen will unmount');
+      // Виконати дії перед демонтажем HomePage
+    };
+  }, []);
+
   return (
     <View
       style={{

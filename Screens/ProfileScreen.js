@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   Keyboard,
@@ -13,6 +14,15 @@ import LogOutButton from '../components/LogOutButton';
 
 const ProfileScreen = (props) => {
   const { loginHandler } = props.route.params;
+
+  useEffect(() => {
+    console.log('ProfileScreen mounted');
+
+    return () => {
+      console.log('ProfileScreen will unmount');
+      // Виконати дії перед демонтажем HomePage
+    };
+  }, []);
 
   return (
     <StartScreenBackground>
