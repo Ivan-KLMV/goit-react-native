@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
@@ -9,6 +11,11 @@ import CameraScreen from './CameraScreen';
 import { Image } from 'react-native';
 
 const CreatePostsScreen = () => {
+  const navigation = useNavigation();
+  const isFocused = useIsFocused();
+
+  console.log(isFocused);
+
   const [type, setType] = useState(CameraType.back);
   const [cameraRef, setCameraRef] = useState(null);
   const [pathToFile, setPathToFile] = useState(null);
@@ -24,9 +31,10 @@ const CreatePostsScreen = () => {
 
     return () => {
       console.log('Component will unmount');
+      setPathToFile(null);
       // Виконати дії перед демонтажем компоненту
     };
-  }, []);
+  }, [isFocused]);
 
   function toggleCameraType() {
     setType((current) =>
@@ -49,8 +57,8 @@ const CreatePostsScreen = () => {
     <View
       style={{
         flex: 1,
-        // backgroundColor: 'white',
-        backgroundColor: 'hotpink',
+        backgroundColor: 'white',
+        // backgroundColor: 'hotpink',
         paddingTop: 32,
         paddingBottom: 10,
         paddingLeft: 16,
@@ -73,8 +81,7 @@ const CreatePostsScreen = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 aspectRatio: 4 / 3,
-                // backgroundColor: '#F6F6F6',
-                backgroundColor: 'red',
+                backgroundColor: '#F6F6F6',
                 overflow: 'hidden',
                 borderRadius: 4,
                 borderColor: '#E8E8E8',
@@ -83,45 +90,47 @@ const CreatePostsScreen = () => {
               }}
             >
               {!pathToFile ? (
-                <Camera
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    aspectRatio: 9 / 16,
-                    width: '100%',
-                    // height: '75%',
-                  }}
-                  ref={setCameraRef}
-                  type={type}
-                  ratio="16:9"
-                >
-                  <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={async () => {
-                      if (cameraRef) {
-                        const { uri } = await cameraRef.takePictureAsync();
-                        console.log('uri', uri);
-                        // const path = await MediaLibrary.createAssetAsync(uri);
-                        // console.log(path.uri);
-                        setPathToFile(uri);
-                        console.log('pathToFile', pathToFile);
-                      }
+                isFocused ? (
+                  <Camera
+                    style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      aspectRatio: 9 / 16,
+                      width: '100%',
+                      // height: '75%',
                     }}
+                    ref={setCameraRef}
+                    type={type}
+                    ratio="16:9"
                   >
-                    <View
-                      style={{
-                        width: 60,
-                        height: 60,
-                        backgroundColor: 'white',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        borderRadius: 50,
+                    <TouchableOpacity
+                      activeOpacity={0.7}
+                      onPress={async () => {
+                        if (cameraRef) {
+                          const { uri } = await cameraRef.takePictureAsync();
+                          console.log('uri', uri);
+                          // const path = await MediaLibrary.createAssetAsync(uri);
+                          // console.log(path.uri);
+                          setPathToFile(uri);
+                          console.log('pathToFile', pathToFile);
+                        }
                       }}
                     >
-                      <CameraSvgComponent />
-                    </View>
-                  </TouchableOpacity>
-                </Camera>
+                      <View
+                        style={{
+                          width: 60,
+                          height: 60,
+                          backgroundColor: 'white',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius: 50,
+                        }}
+                      >
+                        <CameraSvgComponent />
+                      </View>
+                    </TouchableOpacity>
+                  </Camera>
+                ) : null
               ) : (
                 <Image
                   source={{ uri: pathToFile }}
@@ -169,7 +178,13 @@ const CreatePostsScreen = () => {
               />
             </View>
           </View>
-          <TouchableOpacity activeOpacity={0.7}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              navigation.navigate('Публікації');
+              setPathToFile(null);
+            }}
+          >
             <View
               style={{
                 marginTop: 27,
