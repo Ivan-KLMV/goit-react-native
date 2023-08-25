@@ -34,12 +34,12 @@ const PostCard = () => {
             <Text style={{ fontSize: 16, fontWeight: 400 }}>153</Text>
           </View>
         </View>
-        <View style={{ flexDirection: 'row' }}>
-          <Pressable
-            onPress={() => {
-              console.log(navigation.navigate('MapScreen'));
-            }}
-          >
+        <Pressable
+          onPress={() => {
+            console.log(navigation.navigate('MapScreen'));
+          }}
+        >
+          <View style={{ flexDirection: 'row' }}>
             <MapPinSvgComponent style={{ marginRight: 8 }} />
             <Text
               style={{
@@ -50,8 +50,8 @@ const PostCard = () => {
             >
               Ukraine
             </Text>
-          </Pressable>
-        </View>
+          </View>
+        </Pressable>
       </View>
     </View>
   );
