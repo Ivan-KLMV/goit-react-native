@@ -15,13 +15,15 @@ import {
 } from 'react-native';
 import StartScreenBackground from '../components/StartScreenBackground';
 
-const LoginScreen = () => {
+const LoginScreen = (props) => {
   const [isFocused, setFocus] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [isPasswordShown, setPasswordShown] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
+
+  const { loginHandler } = props.route.params;
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -71,6 +73,8 @@ const LoginScreen = () => {
     ToastAndroid.show(`Email: ${email}`, ToastAndroid.SHORT);
     console.log('Email', email);
     console.log('Password', password);
+
+    loginHandler(true);
   };
 
   return (
