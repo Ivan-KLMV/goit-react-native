@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 const MapScreen = () => {
   return (
     <View style={styles.container}>
       <MapView
+        provider={PROVIDER_GOOGLE}
         style={styles.mapStyle}
         region={{
           latitude: 37.78825,
@@ -14,7 +15,7 @@ const MapScreen = () => {
           longitudeDelta: 0.0421,
         }}
         mapType="standard"
-        minZoomLevel={15}
+        minZoomLevel={0}
         onMapReady={() => console.log('Map is ready')}
         onRegionChange={() => console.log('Region change')}
       >
