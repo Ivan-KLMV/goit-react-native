@@ -2,8 +2,11 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import ComentMessageSvgComponent from './SVGs/ComentMessageSvgComponent';
 import ThumbsUpSvgComponent from './SVGs/ThumbsUpSvgComponent';
 import MapPinSvgComponent from './SVGs/MapPinSvgComponent';
+import { Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 const PostCard = () => {
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -22,27 +25,39 @@ const PostCard = () => {
       </Text>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <View style={{ flexDirection: 'row', gap: 24 }}>
-          <View style={{ flexDirection: 'row' }}>
-            <ComentMessageSvgComponent style={{ marginRight: 8 }} />
-            <Text style={{ fontSize: 16, fontWeight: 400 }}>8</Text>
-          </View>
+          <Pressable
+            onPress={() => {
+              navigation.navigate('Коментарі');
+            }}
+          >
+            <View style={{ flexDirection: 'row' }}>
+              <ComentMessageSvgComponent style={{ marginRight: 8 }} />
+              <Text style={{ fontSize: 16, fontWeight: 400 }}>8</Text>
+            </View>
+          </Pressable>
           <View style={{ flexDirection: 'row' }}>
             <ThumbsUpSvgComponent style={{ marginRight: 8 }} />
             <Text style={{ fontSize: 16, fontWeight: 400 }}>153</Text>
           </View>
         </View>
-        <View style={{ flexDirection: 'row' }}>
-          <MapPinSvgComponent style={{ marginRight: 8 }} />
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: 400,
-              textDecorationLine: 'underline',
-            }}
-          >
-            Ukraine
-          </Text>
-        </View>
+        <Pressable
+          onPress={() => {
+            navigation.navigate('MapScreen');
+          }}
+        >
+          <View style={{ flexDirection: 'row' }}>
+            <MapPinSvgComponent style={{ marginRight: 8 }} />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: 400,
+                textDecorationLine: 'underline',
+              }}
+            >
+              Ukraine
+            </Text>
+          </View>
+        </Pressable>
       </View>
     </View>
   );

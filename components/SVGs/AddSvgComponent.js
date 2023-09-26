@@ -17,7 +17,6 @@ export function AddSvgComponent(props) {
         clipRule="evenodd"
         d="M13 6h-1v6H6v1h6v6h1v-6h6v-1h-6V6z"
         fill={props.fill}
-        // "#FF6C00"
       />
     </Svg>
   );

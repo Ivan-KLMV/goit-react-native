@@ -4,8 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import RegistrationScreen from './Screens/RegistrationScreen';
 import LoginScreen from './Screens/LoginScreen';
-import PostScreen from './Screens/PostsScreen';
+// import PostScreen from './Screens/PostsScreen';
 import HomePage from './Screens/HomePage';
+import MapScreen from './Screens/MapScreen';
+import CommentsScreen from './Screens/CommentsScreen';
 
 export default function App() {
   const [isLogined, setIslogined] = useState(true);
@@ -30,6 +32,8 @@ export default function App() {
             }}
             initialParams={{ loginHandler }}
           />
+          <MainStack.Screen name="MapScreen" component={MapScreen} />
+          <MainStack.Screen name="Коментарі" component={CommentsScreen} />
         </MainStack.Navigator>
       ) : (
         <MainStack.Navigator initialRouteName="RegistrationScreen">
@@ -43,6 +47,7 @@ export default function App() {
             name="LoginScreen"
             component={LoginScreen}
             options={{ headerShown: false }}
+            initialParams={{ loginHandler }}
           />
         </MainStack.Navigator>
       )}

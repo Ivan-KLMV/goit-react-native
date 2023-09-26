@@ -1,7 +1,21 @@
 {
   "expo": {
+    "plugins": [
+      [
+        "expo-camera",
+        { "cameraPermission": "Allow MyFirstApp to access your camera." }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow MyFirstApp to access your photos.",
+          "savePhotosPermission": "Allow MyFirstApp to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ],
     "name": "MyFirstApp",
-    "slug": "MyFirstApp",
+    "slug": "my-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,20 +25,28 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "config": {
+        "googleMaps": { "apiKey": "AIzaSyDOMUsx4cUCbpG8f0Lj8MoOh_52SLO5KTg" }
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.klmv.myapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "302038e5-17d7-4c0e-b743-7dc6c85b7614"
+      }
+    },
+    "owner": "klmv"
   }
 }
