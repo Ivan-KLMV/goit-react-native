@@ -13,8 +13,6 @@ import PostCard from '../components/PostCard';
 import LogOutButton from '../components/LogOutButton';
 
 const ProfileScreen = (props) => {
-  const { loginHandler } = props.route.params;
-
   useEffect(() => {
     console.log('ProfileScreen mounted');
 
@@ -58,7 +56,7 @@ const ProfileScreen = (props) => {
             </View>
             <Text style={styles.header}>Natali Romanova</Text>
             <View style={{ position: 'absolute', right: 6, top: 12 }}>
-              <LogOutButton loginHandler={loginHandler} />
+              <LogOutButton />
             </View>
 
             <PostCard />

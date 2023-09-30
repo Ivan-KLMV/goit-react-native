@@ -1,29 +1,31 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { Pressable } from 'react-native';
+import { ToastAndroid } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {
   View,
-  KeyboardAvoidingView,
   TextInput,
   StyleSheet,
   Text,
-  Platform,
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
-  ToastAndroid,
+  TouchableHighlight,
 } from 'react-native';
-import StartScreenBackground from '../components/StartScreenBackground';
 
-const LoginScreen = (props) => {
+import StartScreenBackground from '../components/StartScreenBackground';
+import { AddSvgComponent } from '../components/SVGs';
+import { useDispatch } from 'react-redux';
+import { logIn } from '../redux/authSlice';
+
+const RegistrationScreen = (props) => {
   const [isFocused, setFocus] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [isPasswordShown, setPasswordShown] = useState(true);
+  const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
-
-  const { loginHandler } = props.route.params;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -63,18 +65,24 @@ const LoginScreen = (props) => {
   });
 
   const onLogin = () => {
-    if (!email || !password) {
+    if (!login || !email || !password) {
       ToastAndroid.show(
-        'Будь ласка, заповніть всі поля для входу!',
+        'Будь ласка, заповніть всі поля для реєстрації!',
         ToastAndroid.SHORT
       );
       return;
     }
-    ToastAndroid.show(`Email: ${email}`, ToastAndroid.SHORT);
+    ToastAndroid.show(
+      `Login: ${login}
+     Email: ${email}`,
+      ToastAndroid.SHORT
+    );
+    console.log('Login', login);
     console.log('Email', email);
     console.log('Password', password);
 
-    loginHandler(true);
+    // loginHandler(true);
+    dispatch(logIn());
   };
 
   return (
@@ -82,16 +90,32 @@ const LoginScreen = (props) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.inner}>
-            <Text style={styles.header}>Увійти</Text>
+            <View style={styles.avatarBox}>
+              <AddSvgComponent
+                fill="#FF6C00"
+                style={{ position: 'absolute', right: -12, top: 75 }}
+              />
+            </View>
+            <Text style={styles.header}>Реєстрація</Text>
+            <TextInput
+              placeholder="Логін"
+              value={login}
+              onChangeText={setLogin}
+              inputMode="text"
+              placeholderTextColor="#BDBDBD"
+              style={inputStyles(1)}
+              onFocus={() => focusHandler(1)}
+              onBlur={() => focusHandler(1)}
+            />
             <TextInput
               placeholder="Адреса електронної пошти"
               value={email}
               onChangeText={setEmail}
               inputMode="email"
               placeholderTextColor="#BDBDBD"
-              style={inputStyles(1)}
-              onFocus={() => focusHandler(1)}
-              onBlur={() => focusHandler(1)}
+              style={inputStyles(2)}
+              onFocus={() => focusHandler(2)}
+              onBlur={() => focusHandler(2)}
             />
             <View style={{ position: 'relative' }}>
               <TextInput
@@ -100,16 +124,14 @@ const LoginScreen = (props) => {
                 onChangeText={setPassword}
                 placeholderTextColor="#BDBDBD"
                 secureTextEntry={isPasswordShown}
-                style={inputStyles(2)}
-                onFocus={() => focusHandler(2)}
-                onBlur={() => focusHandler(2)}
+                style={inputStyles(3)}
+                onFocus={() => focusHandler(3)}
+                onBlur={() => focusHandler(3)}
               />
-              <TouchableWithoutFeedback
-                onPress={passwordShowHandler}
-                // onPressIn={passwordShowHandler}
-              >
+              <TouchableWithoutFeedback onPress={passwordShowHandler}>
                 <Text
                   style={{
+                    fontSize: 16,
                     position: 'absolute',
                     right: 16,
                     top: 13,
@@ -124,48 +146,26 @@ const LoginScreen = (props) => {
               <View>
                 <TouchableOpacity activeOpacity={0.7} onPress={onLogin}>
                   <View style={styles.btn}>
-                    <Text style={{ fontSize: 16, color: '#FFFFFF' }}>
-                      Увійти
+                    <Text style={{ color: '#FFFFFF', fontSize: 16 }}>
+                      Зареєстуватися
                     </Text>
                   </View>
                 </TouchableOpacity>
                 <View
                   style={{
-                    marginBottom: 111,
+                    marginBottom: 45,
                     marginTop: 16,
                     flexDirection: 'row',
                     justifyContent: 'center',
                   }}
                 >
-                  <Text
-                    style={{
-                      ...styles.link,
-                      marginRight: 5,
-                    }}
+                  <TouchableHighlight
+                    underlayColor="#d3d3d3"
+                    onPress={() => navigation.navigate('LoginScreen')}
+                    style={{ borderRadius: 5 }}
                   >
-                    Немає акаунту?
-                  </Text>
-                  <Pressable
-                    // onPress={() => {
-                    //   currentPage('reg');
-                    // }}
-                    onPress={() => navigation.navigate('RegistrationScreen')}
-                    style={({ pressed }) => [
-                      {
-                        backgroundColor: pressed ? '#d3d3d3' : '',
-                        borderRadius: 5,
-                      },
-                    ]}
-                  >
-                    <Text
-                      style={{
-                        ...styles.link,
-                        textDecorationLine: 'underline',
-                      }}
-                    >
-                      Зареєструватися
-                    </Text>
-                  </Pressable>
+                    <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+                  </TouchableHighlight>
                 </View>
               </View>
             )}
@@ -191,31 +191,41 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
     fontWeight: 500,
-    marginTop: 32,
+    marginTop: 92,
     marginBottom: 32,
+  },
+  avatarBox: {
+    width: 120,
+    height: 120,
+    backgroundColor: '#F6F6F6',
+    borderRadius: 16,
+    position: 'absolute',
+    left: '50%',
+    top: 0,
+    marginLeft: -50,
+    marginTop: -60,
   },
   textInput: {
     fontSize: 16,
     padding: 16,
     height: 50,
+    borderWidth: 1,
     marginBottom: 16,
     borderRadius: 5,
-    borderWidth: 1,
   },
-
   btn: {
-    alignItems: 'center',
     marginTop: 27,
     borderRadius: 50,
     backgroundColor: '#FF6C00',
     paddingBottom: 16,
     paddingTop: 16,
+    alignItems: 'center',
   },
-
   link: {
     color: '#1B4371',
     fontSize: 16,
+    textAlign: 'center',
   },
 });
 
-export default LoginScreen;
+export default RegistrationScreen;

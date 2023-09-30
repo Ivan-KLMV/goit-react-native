@@ -16,7 +16,7 @@ import CameraScreen from './CameraScreen';
 const Tab = createBottomTabNavigator();
 
 const HomePage = (props) => {
-  const { loginHandler } = props.route.params;
+  // const { loginHandler } = props.route.params;
 
   return (
     <Tab.Navigator
@@ -38,7 +38,7 @@ const HomePage = (props) => {
         component={PostScreen}
         options={{
           tabBarIcon: () => <GridSvgComponent />,
-          headerRight: () => <LogOutButton loginHandler={loginHandler} />,
+          headerRight: () => <LogOutButton />,
         }}
       />
       <Tab.Screen
@@ -54,7 +54,7 @@ const HomePage = (props) => {
       <Tab.Screen
         name="Профіль"
         component={ProfileScreen}
-        initialParams={{ loginHandler }}
+        // initialParams={{ loginHandler }}
         options={{
           tabBarIcon: () => <UserSvgComponent />,
           headerShown: false,
