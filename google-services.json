@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "584180228988",
+    "firebase_url": "https://react-native-goit-396807-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "react-native-goit-396807",
+    "storage_bucket": "react-native-goit-396807.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584180228988:android:4fda75566e822e3b2f3af9",
+        "android_client_info": {
+          "package_name": "com.klmv.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOMUsx4cUCbpG8f0Lj8MoOh_52SLO5KTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
