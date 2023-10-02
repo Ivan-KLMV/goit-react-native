@@ -4,6 +4,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { LogOutSvgComponent } from './SVGs';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../redux/authSlice';
+import { logoutDB } from '../firrebase/authUtils';
 
 const LogOutButton = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,6 @@ const LogOutButton = () => {
     <View>
       <TouchableOpacity
         style={{
-          // backgroundColor: 'red',
           width: 42,
           height: 42,
           borderBottomLeftRadius: 4,
@@ -19,7 +19,10 @@ const LogOutButton = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        onPress={() => dispatch(logOut())}
+        onPress={() => {
+          logoutDB();
+          dispatch(logOut());
+        }}
       >
         <LogOutSvgComponent />
       </TouchableOpacity>

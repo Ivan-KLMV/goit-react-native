@@ -16,8 +16,9 @@ import StartScreenBackground from '../components/StartScreenBackground';
 import { AddSvgComponent } from '../components/SVGs';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../redux/authSlice';
+import { registerDB } from '../firrebase/authUtils';
 
-const RegistrationScreen = (props) => {
+const RegistrationScreen = () => {
   const [isFocused, setFocus] = useState(false);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [isPasswordShown, setPasswordShown] = useState(true);
@@ -77,11 +78,9 @@ const RegistrationScreen = (props) => {
      Email: ${email}`,
       ToastAndroid.SHORT
     );
-    console.log('Login', login);
-    console.log('Email', email);
-    console.log('Password', password);
 
     // loginHandler(true);
+    registerDB({ email, password });
     dispatch(logIn());
   };
 

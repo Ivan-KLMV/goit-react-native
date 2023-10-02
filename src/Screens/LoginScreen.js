@@ -16,6 +16,7 @@ import {
 import StartScreenBackground from '../components/StartScreenBackground';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../redux/authSlice';
+import { loginDB } from '../firrebase/authUtils';
 
 const LoginScreen = () => {
   const [isFocused, setFocus] = useState(false);
@@ -72,9 +73,8 @@ const LoginScreen = () => {
       return;
     }
     ToastAndroid.show(`Email: ${email}`, ToastAndroid.SHORT);
-    console.log('Email', email);
-    console.log('Password', password);
 
+    loginDB({ email, password });
     dispatch(logIn());
   };
 

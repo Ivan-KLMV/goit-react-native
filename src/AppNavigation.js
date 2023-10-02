@@ -10,7 +10,7 @@ import HomePage from '../src/Screens/HomePage';
 import MapScreen from '../src/Screens/MapScreen';
 import CommentsScreen from '../src/Screens/CommentsScreen';
 import { isUserLoggedIn } from './redux/authSlice';
-import { loginDB, registerDB } from './utils/createUser';
+import { loginDB, registerDB } from './firrebase/authUtils';
 
 export const AppNavigation = () => {
   const reduxState = useSelector((state) => state.auth);
